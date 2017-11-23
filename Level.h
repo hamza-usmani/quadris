@@ -7,15 +7,15 @@
 
 // Abstract base class
 class Level(){
-	virtual Block create_I_Block();
-	virtual Block create_J_Block();
-	virtual Block create_L_Block();
-	virtual Block create_O_Block();
-	virtual Block create_S_Block();
-	virtual Block create_Z_Block();
-	virtual Block create_T_Block();
+	Block create_I_Block();
+	Block create_J_Block();
+	Block create_L_Block();
+	Block create_O_Block();
+	Block create_S_Block();
+	Block create_Z_Block();
+	Block create_T_Block();
 
-	virtual void makeHeavy(Block &block); //modifies existing block to heavy
+	void makeHeavy(Block &block); //modifies existing block to heavy
 
 public:
 	virtual Block createBlock() = 0;

@@ -4,6 +4,10 @@
 
 using namespace std;
 
+//use the flags below combined with cout statements in code to help track issuesa
+const int LEVEL_DIAGNOSTIC = 0;
+// add more flags here
+
 const int width = 11;
 const int height = 18;
 

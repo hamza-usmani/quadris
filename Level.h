@@ -5,8 +5,9 @@
 
 // Abstract base class
 class Level(){
-	Block createBlock() = 0;
-	Block createBlock_from_seq(vector &sequence);
+public:
+	virtual Block createBlock() = 0;
+	virtual Block createBlock_from_seq(vector<char> &sequence);
 	~Level();
 }
 

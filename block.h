@@ -1,4 +1,4 @@
-#ifndef block_h
+ #ifndef block_h
 #define block_h
 
 #include <vector>

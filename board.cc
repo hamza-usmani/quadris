@@ -1,16 +1,15 @@
 #include "board.h"
 
-
 Board::Board(int width, int height): width(width), height(height){
-    TextDisplay *tmpDisplay = new TextDisplay(width, height);
-    td = tmpDisplay;
+   auto tmpDisplay =  std::make_shared<TextDisplay>(width, height);
+   td = tmpDisplay;
     
     for (int j=0; j<height; j++){
         std::vector<Cell> tmp;
         for (int i=0; i<width; i++){
-            Cell tmpCell;
-            tmpCell.attach(td);
-            tmp.emplace_back();
+            Cell tmpCell(i,j);
+            tmpCell.attach(td.get());
+            tmp.emplace_back(tmpCell);
         }
         grid.emplace_back(tmp);
     }

@@ -1,34 +1,31 @@
- #ifndef block_h
+#ifndef block_h
 #define block_h
 
 #include <vector>
 #include "cell.h"
+#include "Level.h"
 
-struct Pos{
-    int x;
-    int y;
-};
+struct Pos;
 
 class Block{
     int count;
     std::vector<Pos> position;
     Pos leftCorner;
-    //LevelList levelCreated;
+    int levelCreated;
     
     public:
-    //Block(LevelList levelCreated) this is the format for all sublcass constructors
     
     //getters:
     int getCount();
     Pos getLeftCorner();
-    //LevelList getLevelCreated();
+    int getLevelCreated();
     
     //transormations
-    //virtual clockwise() = 0;
-    //virtual counterclockwise() = 0;
-    //virtual moveLeft() = 0;
-    //virtual moveRight() = 0;
-    //virtual moveDown() = 0;
+    virtual void clockwise() = 0;
+    virtual void counterclockwise() = 0;
+    virtual void moveLeft() = 0;
+    virtual void moveRight() = 0;
+    virtual void moveDown() = 0;
 };
 
 #endif

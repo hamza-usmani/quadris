@@ -1,8 +1,13 @@
 #include "cell.h"
 
-Cell::Cell(){
+Cell::Cell(int width, int height){
+    this->position = Pos{width, height};
     this->cellState = State::NONE;
     this->cur = nullptr;
+}
+
+Pos Cell::getPosition(){
+    return this->position;
 }
 
 State Cell::getState(){

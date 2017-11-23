@@ -8,7 +8,7 @@ Pos Block::getLeftCorner(){
     return this->leftCorner;
 }
 
-/*LevelList Block::getLevelCreated() {
+int Block::getLevelCreated() {
     return this->levelCreated;
-}*/
+}
 

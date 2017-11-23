@@ -1,6 +1,7 @@
 #ifndef board_h
 #define board_h
 
+#include <memory>
 #include <vector>
 #include "cell.h"
 #include "textdisplay.h"
@@ -10,7 +11,7 @@ class Board{
     std::vector<std::vector<Cell>> grid;
     int width;
     int height;
-    TextDisplay *td = nullptr;
+    std::shared_ptr<TextDisplay> td;
     public:
     Board(int width, int height);
     bool isLastRowFull();

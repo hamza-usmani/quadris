@@ -7,8 +7,7 @@ class Level_0: public Level{
 	int cursor = 0; // Tracks which shape we are currently on
 public:
     Level_0();
-    //Block createBlock() override;
-	//Block createBlock_from_seq(std::vector<char> &sequence) override;
+	Block *createBlock_from_seq(std::vector<char> &sequence) override;
 };
 
 #endif

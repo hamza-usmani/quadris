@@ -1,6 +1,9 @@
 #include <iostream>
+#include <memory>
 #include <string>
 #include "board.h"
+#include "Level.h"
+#include "Level_0.h"
 
 using namespace std;
 
@@ -11,13 +14,21 @@ const int LEVEL_DIAGNOSTIC = 0;
 const int width = 11;
 const int height = 18;
 
+
 int main(int argc, const char * argv[]) {
     
-    Board mainBoard(width, height);
-    //level *l = new LevelZero;
+    //currently mainBoard is initiated with fixed level 0
+    Board mainBoard(width, height, 0);
+    auto l = make_shared<Level>();
+   
+    //lets default to level 0 for now
+    Level_0 curLevel;
+    *l = curLevel;
+    
     //Block *current = l->createBlock();
     //Blocks *next;
-    int score, highscore;
+
+    cout<<mainBoard;
     string cmd;
     
     while(true){

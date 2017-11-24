@@ -14,6 +14,7 @@ class Block{
     int levelCreated;
     
     public:
+    Block(int levelCreated);
     
     //getters:
     int getCount();

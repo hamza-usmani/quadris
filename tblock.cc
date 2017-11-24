@@ -1,6 +1,6 @@
 #include "tblock.h"
 
-TBlock::TBlock(int levelCreated){
+TBlock::TBlock(int levelCreated):Block(levelCreated){
     
 }
 

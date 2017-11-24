@@ -25,11 +25,15 @@ void TextDisplay::notify(Cell &whoFrom){
 
 
 std::ostream &operator<<(std::ostream &out, const TextDisplay &td){
+    for (int i=0; i<td.width; i++) out<<"-";
+    out<<std::endl;
     for (auto i: td.display){
         for (auto j: i){
             out<<j;
         }
         out<<std::endl;
     }
+    for (int i=0; i<td.width; i++) out<<"-";
+    out<<std::endl;
     return out;
 }

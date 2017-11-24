@@ -1,6 +1,6 @@
 #include "sblock.h"
 
-SBlock::SBlock(int levelCreated){
+SBlock::SBlock(int levelCreated):Block(levelCreated){
     
 }
 

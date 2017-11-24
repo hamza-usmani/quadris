@@ -1,6 +1,6 @@
 #include "oblock.h"
 
-OBlock::OBlock(int levelCreated){
+OBlock::OBlock(int levelCreated): Block(levelCreated){
     
 }
 

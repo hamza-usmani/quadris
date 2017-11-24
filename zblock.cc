@@ -1,6 +1,6 @@
 #include "zblock.h"
 
-ZBlock::ZBlock(int levelCreated){
+ZBlock::ZBlock(int levelCreated):Block(levelCreated){
     
 }
 

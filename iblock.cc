@@ -1,6 +1,6 @@
 #include "iblock.h"
 
-IBlock::IBlock(int levelCreated){
+IBlock::IBlock(int levelCreated):Block(levelCreated){
     
 }
 

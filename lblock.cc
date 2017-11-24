@@ -1,7 +1,7 @@
 #include "lblock.h"
 
-LBlock::LBlock(int levelCreated){
-    
+LBlock::LBlock(int levelCreated):Block(levelCreated){
+
 }
 
 void LBlock::clockwise(){

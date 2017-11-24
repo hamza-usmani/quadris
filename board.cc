@@ -1,6 +1,7 @@
 #include "board.h"
+#include <iostream>
 
-Board::Board(int width, int height): width(width), height(height){
+Board::Board(int width, int height, int curLevel): width(width), height(height), curLevel(curLevel), score(0), highscore(0){
    auto tmpDisplay =  std::make_shared<TextDisplay>(width, height);
    td = tmpDisplay;
     
@@ -29,4 +30,12 @@ bool Board::addBlock(Block &){
 }
 void Board::eraseBlock(Block &){
     //this will simply erase a Block objects positions from grid
+}
+
+std::ostream &operator<<(std::ostream &out, const Board &b){
+    out<<"Level: "<<b.curLevel<<std::endl;
+    out<<"Score: "<<b.score<<std::endl;
+    out<<"Hi Score: "<<b.highscore<<std::endl;
+    out<< (*b.td);
+    return out;
 }

@@ -1,6 +1,6 @@
 #include "jblock.h"
 
-JBlock::JBlock(int levelCreated){
+JBlock::JBlock(int levelCreated):Block(levelCreated){
     
 }
 

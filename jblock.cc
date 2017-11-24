@@ -1,7 +1,9 @@
 #include "jblock.h"
 
-JBlock::JBlock(int levelCreated):Block(levelCreated){
-    
+JBlock::JBlock(int levelCreated):Block(levelCreated, 'j'){
+    this->position.emplace_back(Pos{0,2});
+    this->position.emplace_back(Pos{1,3});
+    this->position.emplace_back(Pos{2,3});
 }
 
 void JBlock::clockwise(){

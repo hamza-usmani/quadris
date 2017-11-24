@@ -1,7 +1,9 @@
 #include "sblock.h"
 
-SBlock::SBlock(int levelCreated):Block(levelCreated){
-    
+SBlock::SBlock(int levelCreated):Block(levelCreated, 's'){
+    this->position.emplace_back(Pos{1,3});
+    this->position.emplace_back(Pos{0,2});
+    this->position.emplace_back(Pos{1,2});
 }
 
 void SBlock::clockwise(){

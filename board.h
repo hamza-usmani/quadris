@@ -15,16 +15,16 @@ class Board{
     int curLevel;
     int score;
     int highscore;
-    std::shared_ptr<TextDisplay> td;
+    TextDisplay *td;
     //vector<char> nextBlock;
     
     public:
     Board(int width, int height, int curLevel);
     bool isLastRowFull();
     void removeLine();
+    bool addBlock(Block *b);
+    void eraseBlock(Block *b);
     //void dropBlock(); I will deal with this once the transformations are implemented
-    bool addBlock(Block &);
-    void eraseBlock(Block &);
     
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

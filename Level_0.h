@@ -2,12 +2,14 @@
 #define LEVEL_0
 
 #include "Level.h"
+#include <vector>
 
 class Level_0: public Level{
-	int cursor = 0; // Tracks which shape we are currently on
-public:
-    Level_0();
-	Block *createBlock_from_seq(std::vector<char> &sequence) override;
+    std::vector<char> sequence;
+    int index;
+    public:
+    Level_0(std::vector<char> &sequence);
+    Block *createBlock() override;
 };
 
 #endif

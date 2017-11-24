@@ -1,7 +1,7 @@
 #include "iblock.h"
 
-IBlock::IBlock(int levelCreated):Block(levelCreated){
-    
+IBlock::IBlock(int levelCreated):Block(levelCreated, 'i'){
+    for (int i=0; i<3; i++) this->position.emplace_back(Pos{0,i});
 }
 
 void IBlock::clockwise(){

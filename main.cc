@@ -7,9 +7,8 @@
 
 using namespace std;
 
-//use the flags below combined with cout statements in code to help track issuesa
+//temp Flags
 const int LEVEL_DIAGNOSTIC = 0;
-// add more flags here
 
 const int width = 11;
 const int height = 18;
@@ -19,31 +18,33 @@ int main(int argc, const char * argv[]) {
     
     //currently mainBoard is initiated with fixed level 0
     Board mainBoard(width, height, 0);
-    auto l = make_shared<Level>();
+    Level *l;
    
-    //lets default to level 0 for now
-    Level_0 curLevel;
-    *l = curLevel;
+    //lets default to level 0 for now, testing with a fixed vector
+    vector<char> tmp;
+    tmp.emplace_back('z');
+    l = new Level_0(tmp);
     
-    //Block *current = l->createBlock();
-    //Blocks *next;
+    Block *current = l->createBlock();
+    Block *next;
 
     cout<<mainBoard;
     string cmd;
     
-    while(true){
-        //next = l->createBlock();
-        //mainBoard->addBlock(&cur);
+    while(current){
+        mainBoard.addBlock(current);
+        cout<<mainBoard;
+        next = l->createBlock();
         
         cin>>cmd;
-        
         if (cmd == "left") { }
         else if (cmd == "right") { }
         else if (cmd == "down") { }
         else if (cmd == "clockwise") { }
         else if (cmd == "counterclockwise") { }
+        else if (cmd == "c") { }
         
-        //cur = next;
+        current = next;
     }
     
     return 0;

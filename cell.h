@@ -22,9 +22,9 @@ class Cell{
     Cell(int width, int height);
     Pos getPosition();
     State getState();
+    void setState(char blockChar);
     Block *getCur();
     void setCur(Block *changeTo);
-    
     void attach(Observer *o);
     void notifyObservers();
 };

@@ -14,6 +14,17 @@ State Cell::getState(){
     return this->cellState;
 }
 
+void Cell::setState(char blockChar){
+    if (blockChar == 'i') this->cellState = State::I;
+    else if (blockChar == 'j') this->cellState = State::J;
+    else if (blockChar == 'l') this->cellState = State::L;
+    else if (blockChar == 'o') this->cellState = State::O;
+    else if (blockChar == 's') this->cellState = State::S;
+    else if (blockChar == 'z') this->cellState = State::Z;
+    else if (blockChar == 't') this->cellState = State::T;
+    this->notifyObservers();
+}
+
 Block *Cell::getCur(){
     return this->cur;
 }

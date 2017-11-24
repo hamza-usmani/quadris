@@ -9,18 +9,25 @@ struct Pos;
 
 class Block{
     int count;
-    std::vector<Pos> position;
-    Pos leftCorner;
     int levelCreated;
     bool isHeavy;
+    char blockChar;
+    
+    protected:
+    std::vector<Pos> position;
+    Pos leftCorner;
     
     public:
-    Block(int levelCreated);
+    Block(int levelCreated, char blockChar);
     
-    //getters:
+    //getters & setters
     int getCount();
-    Pos getLeftCorner();
+    void increaseCount();
     int getLevelCreated();
+    bool getIsHeavy();
+    char getBlockChar();
+    std::vector<Pos> getPositions();
+    Pos getLeftCorner();
     
     //transormations
     virtual void clockwise() = 0;

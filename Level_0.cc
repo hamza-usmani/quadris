@@ -1,47 +1,21 @@
 #include "Level_0.h"
 #include "block.h" 
-#include "iblock.h" 
-#include "jblock.h"
-#include "lblock.h"
-#include "oblock.h"
-#include "sblock.h"
-#include "zblock.h"
-#include "tblock.h"
-#include <memory>
 
-Level_0::Level_0(){
-    this->LevelDifficulty = 0;
+
+Level_0::Level_0(std::vector<char> &sequence): Level(0), sequence(sequence), index(0) { }
+
+Block *Level_0::createBlock(){
+    if (index > sequence.size() - 1) return nullptr;
+    
+    char curChar = sequence.at(index);
+    index++;
+    
+    if (curChar == 'i' || curChar == 'I') return create_I_Block();
+    else if (curChar == 'j' || curChar == 'J') return create_J_Block();
+    else if (curChar == 'l' || curChar == 'L') return create_L_Block();
+    else if (curChar == 'o' || curChar == 'O') return create_O_Block();
+    else if (curChar == 's' || curChar == 'S') return create_S_Block();
+    else if (curChar == 'z' || curChar == 'Z') return create_Z_Block();
+    else return create_T_Block();
 }
 
-Block *Level_0::createBlock_from_seq(std::vector<char> &sequence){
-	char shape = sequence[cursor];
-	this->cursor++;
-
-	//Block *my_block = new IBlock{0}; 
-	// ^^ this follows factory example in tutorial
-
-	switch(shape){
-		case I:{
-			auto my_block = std::make_shared<IBlock>(0);
-			return my_block.get();
-		}case J:{
-			auto my_block = std::make_shared<JBlock>(0);
-			return my_block.get();
-		}case L:{
-			auto my_block = std::make_shared<LBlock>(0);
-			return my_block.get();
-		}case O:{
-			auto my_block = std::make_shared<OBlock>(0);
-			return my_block.get();
-		}case S:{
-			auto my_block = std::make_shared<SBlock>(0);
-			return my_block.get();
-		}case Z:{
-			auto my_block = std::make_shared<ZBlock>(0);
-			return my_block.get();
-		}case T:{
-			auto my_block = std::make_shared<TBlock>(0);
-			return my_block.get();
-		}
-	}
-}

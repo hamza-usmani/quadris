@@ -12,6 +12,7 @@ class Block{
     std::vector<Pos> position;
     Pos leftCorner;
     int levelCreated;
+    bool isHeavy;
     
     public:
     Block(int levelCreated);

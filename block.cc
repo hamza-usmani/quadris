@@ -6,6 +6,7 @@ Block::Block(int levelCreated) {
     position.emplace_back(corner);
     leftCorner = corner;
     this->levelCreated = levelCreated;
+    this->isHeavy = this->levelCreated < 3 ? false: true;
 }
 
 int Block::getCount(){

@@ -16,8 +16,9 @@ Block *Level_0::createBlock_from_seq(std::vector<char> &sequence){
 	char shape = sequence[cursor];
 	this->cursor++;
 
-	Block *my_block = new IBlock{0}; // TODO: Safe pointer
+	Block *my_block = new IBlock{0}; // TODO: Safe pointer Ie. auto my_block = std::make_shared<IBlock>(0);
 	return my_block;
+	// ^^ this follows factory example in tutorial
 /*
 	switch(shape){
 		case I:

@@ -24,7 +24,7 @@ class Board{
     void removeLine();
     bool addBlock(Block *b);
     void eraseBlock(Block *b);
-    //void dropBlock(); I will deal with this once the transformations are implemented
+    void dropBlock(Block *b);
     
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

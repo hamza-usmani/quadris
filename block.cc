@@ -1,21 +1,30 @@
 #include "block.h"
+#include <iostream>
 
-Block::Block(int levelCreated, char blockChar) {
+Block::Block(int levelCreated, char blockChar, int width, int height) {
     this->count = 0;
     Pos corner{0,3};
     this->position.emplace_back(corner);
-    this->leftCorner = corner;
+    this->leftCorner = Pos{0,3};
     this->levelCreated = levelCreated;
+    this->width = width;
+    this->height = height;
     this->blockChar = blockChar;
     this->isHeavy = this->levelCreated < 3 ? false: true;
 }
 
-int Block::getCount(){
-    return this->count;
-}
-
 void Block::increaseCount(){
     this->count++;
+}
+
+void Block::moveDown(int y){
+    for (auto &i: this->position){
+        i.y += y;
+    }
+}
+
+int Block::getCount(){
+    return this->count;
 }
 
 int Block::getLevelCreated() {
@@ -30,12 +39,20 @@ char Block::getBlockChar(){
     return this->blockChar;
 }
 
-std::vector<Pos> Block::getPositions(){
+std::vector<Pos> &Block::getPositions(){
     return this->position;
 }
 
 Pos Block::getLeftCorner(){
     return this->leftCorner;
 }
+
+int Block::getWidth(){
+    return this->width;
+}
+int Block::getHeight(){
+    return this->height;
+}
+
 
 

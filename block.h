@@ -12,24 +12,32 @@ class Block{
     int levelCreated;
     bool isHeavy;
     char blockChar;
+    int width;
+    int height;
     
     protected:
     std::vector<Pos> position;
     Pos leftCorner;
     
     public:
-    Block(int levelCreated, char blockChar);
+    Block(int levelCreated, char blockChar, int width, int height);
+    //Block(int count, int levelCreated, char blockChar, int width, int height, std::vector<Pos> position, Pos leftCorner);
     
-    //getters & setters
-    int getCount();
+    //setters
     void increaseCount();
+    void moveDown(int y);
+    
+    //getters
+    int getCount();
     int getLevelCreated();
     bool getIsHeavy();
     char getBlockChar();
-    std::vector<Pos> getPositions();
+    std::vector<Pos> &getPositions();
     Pos getLeftCorner();
+    int getWidth();
+    int getHeight();
     
-    //transormations
+    //pure virtual functions
     virtual void clockwise() = 0;
     virtual void counterclockwise() = 0;
     virtual void moveLeft() = 0;

@@ -1,6 +1,6 @@
 #include "tblock.h"
 
-TBlock::TBlock(int levelCreated):Block(levelCreated, 't'){
+TBlock::TBlock(int levelCreated):Block(levelCreated, 't', 3, 2){
     this->position.pop_back();
     this->position.emplace_back(Pos{1,3});
     this->position.emplace_back(Pos{0,2});

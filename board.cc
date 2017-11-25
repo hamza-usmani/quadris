@@ -51,6 +51,29 @@ void Board::eraseBlock(Block *b){
     }
 }
 
+//drop a block to the bottom
+void Board::dropBlock(Block *b){
+    this->eraseBlock(b);
+    
+    int curX = b->getLeftCorner().x;
+    int curY = b->getLeftCorner().y;
+    
+    for (curY; curY < height; curY++){
+        bool found = false;
+        for (int i = curX; i <= curX + b->getWidth(); i++){
+            if (grid.at(curY).at(i).getState() != State::NONE){
+                found = true;
+                break;
+            }
+        }
+        if (found) break;
+    }
+    
+    b->moveDown(curY - b->getLeftCorner().y - 1);
+    this->addBlock(b);
+}
+
+
 std::ostream &operator<<(std::ostream &out, const Board &b){
     out<<"Level: "<<b.curLevel<<std::endl;
     out<<"Score: "<<b.score<<std::endl;

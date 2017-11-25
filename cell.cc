@@ -18,6 +18,7 @@ State Cell::getState(){
 void Cell::clearCell(){
     this->cellState = State::NONE;
     this->cur = nullptr;
+    this->notifyObservers();
 }
 
 void Cell::setBlock(Block *curBlock){

@@ -23,6 +23,8 @@ int main(int argc, const char * argv[]) {
     //lets default to level 0 for now, testing with a fixed vector
     vector<char> tmp;
     tmp.emplace_back('z');
+    tmp.emplace_back('i');
+    tmp.emplace_back('t');
     l = new Level_0(tmp);
     
     Block *current = l->createBlock();
@@ -42,6 +44,10 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "down") { }
         else if (cmd == "clockwise") { }
         else if (cmd == "counterclockwise") { }
+        else if (cmd == "drop") {
+            mainBoard.dropBlock(current);
+            cout<<mainBoard;
+        }
         else if (cmd == "c") { }
         
         current = next;

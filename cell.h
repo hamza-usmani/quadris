@@ -20,11 +20,14 @@ class Cell{
     
     public:
     Cell(int width, int height);
+    
     Pos getPosition();
     State getState();
-    void setState(char blockChar);
+    void clearCell();
+    void setBlock(Block *curBlock);
     Block *getCur();
     void setCur(Block *changeTo);
+    
     void attach(Observer *o);
     void notifyObservers();
 };

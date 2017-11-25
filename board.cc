@@ -18,25 +18,37 @@ Board::Board(int width, int height, int curLevel): width(width), height(height),
 }
 
 bool Board::isLastRowFull(){
-    return grid.at(height-1).empty();
+    for (auto i: grid.at(height-1)){
+        if (i.getState() == State::NONE) return false;
+    }
+    return true;
 }
 
 //this will remove the last row in the grid
 void Board::removeLine(){
-    
+    for (int i = height-1; i>=0; i--){
+        for (int j=0; j< width; j++){
+            if (i == 0){
+                grid.at(i).at(j) = Cell(i,j);
+            }
+            else grid.at(i).at(j) = grid.at(i-1).at(j);
+        }
+    }
 }
 
 //this will add a Block object to the grid by modifying required cells
 bool Board::addBlock(Block *b){
     for (auto i: b->getPositions()){
-        grid.at(i.y).at(i.x).setState(b->getBlockChar());
+        grid.at(i.y).at(i.x).setBlock(b);
     }
     return true;
 }
 
 //this will simply erase a Block objects positions from grid
 void Board::eraseBlock(Block *b){
-    
+    for (auto i: b->getPositions()){
+        grid.at(i.y).at(i.x).clearCell();
+    }
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &b){

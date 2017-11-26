@@ -25,6 +25,7 @@ class Board{
     bool addBlock(Block *b);
     void eraseBlock(Block *b);
     void dropBlock(Block *b);
+    void moveBlockHorizontally(Block *b, int x);
     
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

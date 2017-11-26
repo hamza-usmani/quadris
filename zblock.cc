@@ -8,22 +8,3 @@ ZBlock::ZBlock(int levelCreated):Block(levelCreated, 'z', 3, 2){
     this->position.emplace_back(Pos{1,2});
 }
 
-void ZBlock::clockwise(){
-    
-}
-
-void ZBlock::counterclockwise(){
-    
-}
-
-void ZBlock::moveLeft(){
-    
-}
-
-void ZBlock::moveRight(){
-    
-}
-
-void ZBlock::moveDown(){
-    
-}

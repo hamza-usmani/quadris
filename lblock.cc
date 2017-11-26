@@ -6,22 +6,3 @@ LBlock::LBlock(int levelCreated):Block(levelCreated, 'l', 3, 2){
     this->position.emplace_back(Pos{2,2});
 }
 
-void LBlock::clockwise(){
-    
-}
-
-void LBlock::counterclockwise(){
-    
-}
-
-void LBlock::moveLeft(){
-    
-}
-
-void LBlock::moveRight(){
-    
-}
-
-void LBlock::moveDown(){
-    
-}

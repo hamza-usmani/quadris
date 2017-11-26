@@ -53,24 +53,78 @@ void Board::eraseBlock(Block *b){
 
 //drop a block to the bottom
 void Board::dropBlock(Block *b){
-    this->eraseBlock(b);
-    
-    int curX = b->getLeftCorner().x;
     int curY = b->getLeftCorner().y;
     
-    for (curY; curY < height; curY++){
+    while (curY < height - 1){
         bool found = false;
-        for (int i = curX; i <= curX + b->getWidth(); i++){
-            if (grid.at(curY).at(i).getState() != State::NONE){
+        
+        for (auto i: b->getPositions()){
+            if (grid.at(i.y+1).at(i.x).getCur() != b && grid.at(i.y+1).at(i.x).getState() != State::NONE){
                 found = true;
                 break;
             }
         }
         if (found) break;
+        this->eraseBlock(b);
+        b->moveDown(1);
+        this->addBlock(b);
+    
+        curY++;
+    }
+}
+
+void Board::moveBlockHorizontally(Block *b, int x){ //if no number recieved, ie "right" pass in x = 1
+    int curY = b->getLeftCorner().y;
+    
+    //moving right
+    if (x > 0){
+        int curX = b->getLeftCorner().x + b->getWidth();
+        int newX = curX + x;
+        if (newX > width) {
+            return;
+        }
+        bool found = false;
+        
+        for (curX; curX <= width; curX++){
+            if (curX < newX){
+                 if (grid.at(curY).at(curX).getState() != State::NONE){
+                     found = true;
+                     break;
+                 }
+            }
+            else break;
+            if (found) break;
+        }
+        this->eraseBlock(b);
+        b->moveHorizontally(x);
+        this->addBlock(b);
     }
     
-    b->moveDown(curY - b->getLeftCorner().y - 1);
-    this->addBlock(b);
+    //moving left
+    else if (x < 0){
+        int curX = b->getLeftCorner().x;
+        int newX = curX + x;
+        if (newX < 0) {
+            return;
+        }
+        //this->eraseBlock(b);
+        bool found = false;
+        
+        for (curX; curX >= 0; curX--){
+            if (curX > newX){
+                if (grid.at(curY).at(curX).getState() != State::NONE ){
+                    found = true;
+                    break;
+                }
+            }
+            else break;
+            if (found) break;
+        }
+        this->eraseBlock(b);
+        b->moveHorizontally(x);
+        this->addBlock(b);
+    }
+    
 }
 
 

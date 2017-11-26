@@ -8,22 +8,3 @@ TBlock::TBlock(int levelCreated):Block(levelCreated, 't', 3, 2){
     this->position.emplace_back(Pos{2,2});
 }
 
-void TBlock::clockwise(){
-    
-}
-
-void TBlock::counterclockwise(){
-    
-}
-
-void TBlock::moveLeft(){
-    
-}
-
-void TBlock::moveRight(){
-    
-}
-
-void TBlock::moveDown(){
-    
-}

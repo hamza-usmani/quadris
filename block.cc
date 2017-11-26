@@ -18,8 +18,16 @@ void Block::increaseCount(){
 }
 
 void Block::moveDown(int y){
+    this->leftCorner.y += y;
     for (auto &i: this->position){
         i.y += y;
+    }
+}
+
+void Block::moveHorizontally(int x){
+    this->leftCorner.x += x;
+    for (auto &i: this->position){
+        i.x += x;
     }
 }
 

@@ -6,11 +6,6 @@
 class JBlock: public Block{
     public:
     JBlock(int levelCreated);
-    void clockwise() override;
-    void counterclockwise() override;
-    void moveLeft() override;
-    void moveRight() override;
-    void moveDown() override;
 };
 
 #endif

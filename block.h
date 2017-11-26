@@ -23,9 +23,12 @@ class Block{
     Block(int levelCreated, char blockChar, int width, int height);
     //Block(int count, int levelCreated, char blockChar, int width, int height, std::vector<Pos> position, Pos leftCorner);
     
-    //setters
+    //setters & transformations
     void increaseCount();
     void moveDown(int y);
+    void moveHorizontally(int x);
+    void clockwise();
+    void counterclockwise();
     
     //getters
     int getCount();
@@ -36,13 +39,7 @@ class Block{
     Pos getLeftCorner();
     int getWidth();
     int getHeight();
-    
-    //pure virtual functions
-    virtual void clockwise() = 0;
-    virtual void counterclockwise() = 0;
-    virtual void moveLeft() = 0;
-    virtual void moveRight() = 0;
-    virtual void moveDown() = 0;
+
 };
 
 #endif

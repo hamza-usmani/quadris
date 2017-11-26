@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <fstream>
 #include "board.h"
 #include "Level.h"
 #include "Level_0.h"
@@ -12,11 +13,22 @@
 using namespace std;
 
 //temp Flags
-const int LEVEL_DIAGNOSTIC = 0;
 
 const int width = 11;
 const int height = 18;
 
+// Builds a vector from a given file
+// TODO: Secure proper input
+void build_vector_from_file(vector<char> &my_vect, string f_name){
+	ifstream my_file (f_name);
+	if (my_file.is_open()){
+    	char x;
+    	while (my_file >> x){
+    		my_vect.emplace_back(x);
+    	}
+    	my_file.close();
+    }
+}
 
 int main(int argc, const char * argv[]) {
     
@@ -24,12 +36,11 @@ int main(int argc, const char * argv[]) {
     Board mainBoard(width, height, 0);
     Level *l;
    
-    //lets default to level 0 for now, testing with a fixed vector
-    vector<char> tmp;
-    tmp.emplace_back('z');
-    tmp.emplace_back('i');
-    tmp.emplace_back('t');
-    l = new Level_0(tmp);
+    //lets default to level 0 for now
+    vector<char> sequence_txt_vector;
+    build_vector_from_file(sequence_txt_vector, "sequence.txt");
+
+    l = new Level_0(sequence_txt_vector);
     
     Block *current = l->createBlock();
     Block *next;

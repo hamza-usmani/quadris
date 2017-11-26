@@ -12,12 +12,12 @@ Since there is no end user interaction with this determintation, it is up to the
 assert each block probability sums to denum. Failure to do so may result in undefined behaviour. 
 */
 
-Level_1::Level_1(): Level(1), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob(2), S_prob(1), Z_prob(1), T_prob(2) { }
+Level_1::Level_1(const int seed = 0): Level(1), seed(seed), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob(2), S_prob(1), Z_prob(1), T_prob(2) { }
 
 // TODO: Possibility to throw exception on poorly built object? (Shouldn't be necessarys)
 
 Block *Level_1::createBlock(){
-    // srand(1); //TODO: Insert seed here
+    srand(seed); 
     int rand_num = rand() % denum + 1; // Chooses a random number between 1-denum (12 for this case)
 
     if (rand_num <= I_prob){ // <= 2 (2/12)

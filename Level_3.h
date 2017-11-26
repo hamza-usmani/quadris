@@ -5,6 +5,7 @@
 #include <vector>
 
 class Level_3: public Level{
+	const int seed;
 	const int denum;
 	const int I_prob;
 	const int J_prob;
@@ -14,7 +15,7 @@ class Level_3: public Level{
 	const int Z_prob;
 	const int T_prob;
     public:
-    Level_3();
+    Level_3(const int seed);
     Block *createBlock() override;
 };
 

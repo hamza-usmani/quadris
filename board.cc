@@ -51,13 +51,15 @@ void Board::eraseBlock(Block *b){
     }
 }
 
-//drop a block to the bottom
-void Board::dropBlock(Block *b){
+//will move a block down
+void Board::moveDown(Block *b, int y){ //if no number recieved, ie "down" pass in y = 1
     int curY = b->getLeftCorner().y;
+    int newY = curY + y;
+    if (newY >= height) newY = height - 1; //return;
     
     while (curY < height - 1){
+        if (curY == newY) break;
         bool found = false;
-        
         for (auto i: b->getPositions()){
             if (grid.at(i.y+1).at(i.x).getCur() != b && grid.at(i.y+1).at(i.x).getState() != State::NONE){
                 found = true;
@@ -68,63 +70,77 @@ void Board::dropBlock(Block *b){
         this->eraseBlock(b);
         b->moveDown(1);
         this->addBlock(b);
-    
+        
         curY++;
     }
 }
 
+//will move a block left or right
 void Board::moveBlockHorizontally(Block *b, int x){ //if no number recieved, ie "right" pass in x = 1
-    int curY = b->getLeftCorner().y;
-    
     //moving right
     if (x > 0){
-        int curX = b->getLeftCorner().x + b->getWidth();
+        int curX = b->getLeftCorner().x + b->getWidth() - 1;
         int newX = curX + x;
-        if (newX > width) {
-            return;
-        }
-        bool found = false;
-        
-        for (curX; curX <= width; curX++){
-            if (curX < newX){
-                 if (grid.at(curY).at(curX).getState() != State::NONE){
-                     found = true;
-                     break;
-                 }
-            }
-            else break;
-            if (found) break;
-        }
-        this->eraseBlock(b);
-        b->moveHorizontally(x);
-        this->addBlock(b);
-    }
-    
-    //moving left
-    else if (x < 0){
-        int curX = b->getLeftCorner().x;
-        int newX = curX + x;
-        if (newX < 0) {
-            return;
-        }
-        //this->eraseBlock(b);
-        bool found = false;
-        
-        for (curX; curX >= 0; curX--){
-            if (curX > newX){
-                if (grid.at(curY).at(curX).getState() != State::NONE ){
+        if (newX >= width) newX = width - 1;//return;
+
+        while (curX < width - 1){
+            if (curX == newX) break;
+            bool found = false;
+            for (auto i: b->getPositions()){
+                if (grid.at(i.y).at(i.x+1).getCur() != b && grid.at(i.y).at(i.x+1).getState() != State::NONE){
                     found = true;
                     break;
                 }
             }
-            else break;
             if (found) break;
+            this->eraseBlock(b);
+            b->moveHorizontally(1);
+            this->addBlock(b);
+            curX++;
         }
-        this->eraseBlock(b);
-        b->moveHorizontally(x);
-        this->addBlock(b);
     }
-    
+    //moving left
+    else if (x < 0){
+        int curX = b->getLeftCorner().x;
+        int newX = curX + x;
+        if (newX < 0) newX = 0; //return;
+        
+        while (curX > 0){
+            if (curX == newX) break;
+            bool found = false;
+            for (auto i: b->getPositions()){
+                if (grid.at(i.y).at(i.x-1).getCur() != b && grid.at(i.y).at(i.x-1).getState() != State::NONE){
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+            this->eraseBlock(b);
+            b->moveHorizontally(-1);
+            this->addBlock(b);
+            curX--;
+        }
+    }
+}
+
+
+//drop a block to the bottom, ie. place it
+void Board::dropBlock(Block *b){
+    int curY = b->getLeftCorner().y;
+    while (curY < height - 1){
+        bool found = false;
+        for (auto i: b->getPositions()){
+            if (grid.at(i.y+1).at(i.x).getCur() != b && grid.at(i.y+1).at(i.x).getState() != State::NONE){
+                found = true;
+                break;
+            }
+        }
+        if (found) break;
+        this->eraseBlock(b);
+        b->moveDown(1);
+        this->addBlock(b);
+        curY++;
+    }
 }
 
 

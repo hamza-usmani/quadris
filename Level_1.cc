@@ -12,7 +12,7 @@ Since there is no end user interaction with this determintation, it is up to the
 assert each block probability sums to denum. Failure to do so may result in undefined behaviour. 
 */
 
-Level_1::Level_1(const int seed = 0): Level(1), seed(seed), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob(2), S_prob(1), Z_prob(1), T_prob(2) { }
+Level_1::Level_1(const int seed): Level(1), seed(seed), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob(2), S_prob(1), Z_prob(1), T_prob(2) { }
 
 // TODO: Possibility to throw exception on poorly built object? (Shouldn't be necessarys)
 

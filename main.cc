@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <fstream>
 #include <vector>
 #include "board.h"
 #include "Level.h"
@@ -13,11 +14,8 @@
 
 using namespace std;
 
-//temp Flags
-
 const int width = 11;
 const int height = 18;
-
 
 int main(int argc, const char * argv[]) {
     
@@ -27,7 +25,7 @@ int main(int argc, const char * argv[]) {
    
     //lets default to level 0 for now
     vector<char> sequence_txt_vector;
-    build_vector_from_file(sequence_txt_vector, "sequence.txt");
+    build_vector_from_file(sequence_txt_vector, "test.txt");
     
     l = new Level_0(sequence_txt_vector);
     
@@ -52,7 +50,9 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "right") {
             mainBoard.moveBlockHorizontally(current, 1);
         }
-        else if (cmd == "down") { }
+        else if (cmd == "down") {
+            mainBoard.moveDown(current, 1);
+        }
         else if (cmd == "clockwise") { }
         else if (cmd == "counterclockwise") { }
         else if (cmd == "drop") {

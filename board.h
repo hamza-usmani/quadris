@@ -21,11 +21,15 @@ class Board{
     public:
     Board(int width, int height, int curLevel);
     bool isLastRowFull();
+    
     void removeLine();
     bool addBlock(Block *b);
     void eraseBlock(Block *b);
-    void dropBlock(Block *b);
+    
+    void moveDown(Block *b, int n);
     void moveBlockHorizontally(Block *b, int x);
+    void dropBlock(Block *b);
+    
     
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

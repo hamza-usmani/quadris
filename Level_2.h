@@ -15,7 +15,7 @@ class Level_2: public Level{
 	const int Z_prob;
 	const int T_prob;
     public:
-    Level_2(const int seed);
+    Level_2(const int seed = 0);
     Block *createBlock() override;
 };
 

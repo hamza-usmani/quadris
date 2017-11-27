@@ -123,6 +123,34 @@ void Board::moveBlockHorizontally(Block *b, int x){ //if no number recieved, ie 
     }
 }
 
+//rotate clockwise
+void Board::rotateClockwise(Block *b){
+    this->eraseBlock(b);
+    b->rotateClockwise();
+    
+    for (auto i: b->getPositions()){
+        if (grid.at(i.y).at(i.x).getState() != State::NONE){
+            std::cout<<"CANNOT ROTATE JESUS"<<std::endl;
+            b->rotateCounterclockwise();
+            break;
+        }
+    }
+    this->addBlock(b);
+}
+
+//rotate counterclockwise
+void Board::rotateCounterclockwise(Block *b){
+    this->eraseBlock(b);
+    b->rotateCounterclockwise();
+    
+    for (auto i: b->getPositions()){
+        if (grid.at(i.y).at(i.x).getState() != State::NONE){
+            b->rotateClockwise();
+            break;
+        }
+    }
+    this->addBlock(b);
+}
 
 //drop a block to the bottom, ie. place it
 void Board::dropBlock(Block *b){

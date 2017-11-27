@@ -26,13 +26,10 @@ int main(int argc, const char * argv[]) {
     //lets default to level 0 for now
     vector<char> sequence_txt_vector;
     build_vector_from_file(sequence_txt_vector, "test.txt");
-    
     l = new Level_0(sequence_txt_vector);
     
     Block *current = l->createBlock();
     Block *next = l->createBlock();
-
-    cout<<mainBoard;
     string cmd;
     
     while(true){
@@ -53,12 +50,16 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "down") {
             mainBoard.moveDown(current, 1);
         }
-        else if (cmd == "clockwise") { }
-        else if (cmd == "counterclockwise") { }
+        else if (cmd == "clockwise") {
+            mainBoard.rotateClockwise(current);
+        }
+        else if (cmd == "counterclockwise") {
+             mainBoard.rotateCounterclockwise(current);
+        }
         else if (cmd == "drop") {
-            next = l->createBlock();
             mainBoard.dropBlock(current);
             current = next;
+            next = l->createBlock();
         }
     }
     

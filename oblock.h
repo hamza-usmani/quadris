@@ -6,6 +6,8 @@
 class OBlock: public Block{
     public:
     OBlock(int levelCreated);
+    void rotateClockwise() override;
+    void rotateCounterclockwise() override;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "block.h"
 #include <iostream>
+#include <algorithm>
 
 Block::Block(int levelCreated, char blockChar, int width, int height) {
     this->count = 0;
@@ -11,6 +12,7 @@ Block::Block(int levelCreated, char blockChar, int width, int height) {
     this->height = height;
     this->blockChar = blockChar;
     this->isHeavy = this->levelCreated < 3 ? false: true;
+    this->orientation = 0;
 }
 
 void Block::increaseCount(){

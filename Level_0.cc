@@ -1,7 +1,6 @@
 #include "Level_0.h"
 #include "block.h" 
 
-
 Level_0::Level_0(std::vector<char> &sequence): Level(0), sequence(sequence), index(0) { }
 
 Block *Level_0::createBlock(){

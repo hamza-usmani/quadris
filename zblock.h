@@ -4,8 +4,13 @@
 #include "block.h"
 
 class ZBlock: public Block{
+    void orientation_0(Pos leftCorner, std::vector<Pos> &newPositions);
+    void orientation_1(Pos leftCorner, std::vector<Pos> &newPositions);
+    
     public:
     ZBlock(int levelCreated);
+    void rotateClockwise() override;
+    void rotateCounterclockwise() override;
 };
 
 #endif

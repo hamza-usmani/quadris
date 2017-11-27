@@ -9,17 +9,17 @@ ZBlock::ZBlock(int levelCreated):Block(levelCreated, 'z', 3, 2){
 }
 
 void ZBlock::orientation_0(Pos leftCorner, std::vector<Pos> &newPositions){
-    newPositions.emplace_back(leftCorner);
-    newPositions.emplace_back(Pos{leftCorner.x, leftCorner.y-1});
-    newPositions.emplace_back(Pos{leftCorner.x+1, leftCorner.y-1});
-    newPositions.emplace_back(Pos{leftCorner.x+1, leftCorner.y-2});
-}
-
-void ZBlock::orientation_1(Pos leftCorner, std::vector<Pos> &newPositions){
     newPositions.emplace_back(Pos{leftCorner.x+1, leftCorner.y});
     newPositions.emplace_back(Pos{leftCorner.x+2, leftCorner.y});
     newPositions.emplace_back(Pos{leftCorner.x, leftCorner.y-1});
     newPositions.emplace_back(Pos{leftCorner.x+1, leftCorner.y-1});
+}
+
+void ZBlock::orientation_1(Pos leftCorner, std::vector<Pos> &newPositions){
+    newPositions.emplace_back(leftCorner);
+    newPositions.emplace_back(Pos{leftCorner.x, leftCorner.y-1});
+    newPositions.emplace_back(Pos{leftCorner.x+1, leftCorner.y-1});
+    newPositions.emplace_back(Pos{leftCorner.x+1, leftCorner.y-2});
 }
 
 void ZBlock::rotateClockwise(){

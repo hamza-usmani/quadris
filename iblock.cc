@@ -8,13 +8,13 @@ IBlock::IBlock(int levelCreated):Block(levelCreated, 'i', 4, 1){
 
 void IBlock::orientation_0(Pos leftCorner, std::vector<Pos> &newPositions){
     for (int i=1; i<4; i++){
-        newPositions.emplace_back(Pos{leftCorner.x, leftCorner.y-i});
+        newPositions.emplace_back(Pos{leftCorner.x+i, leftCorner.y});
     }
 }
 
 void IBlock::orientation_1(Pos leftCorner, std::vector<Pos> &newPositions){
     for (int i=1; i<4; i++){
-        newPositions.emplace_back(Pos{leftCorner.x+i, leftCorner.y});
+        newPositions.emplace_back(Pos{leftCorner.x, leftCorner.y-i});
     }
 }
 

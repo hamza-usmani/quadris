@@ -24,17 +24,31 @@ bool Board::isLastRowFull(){
     return true;
 }
 
+
 //this will remove the last row in the grid
 void Board::removeLine(){
-    for (int i = height-1; i>=0; i--){
-        for (int j=0; j< width; j++){
-            if (i == 0){
-                grid.at(i).at(j) = Cell(i,j);
-            }
-            else grid.at(i).at(j) = grid.at(i-1).at(j);
+    for (auto i: grid.back()){
+        if (i.getState() != State::NONE && i.getCur() != nullptr){
+            Block *b = i.getCur();
+            //b->
         }
     }
+    
 }
+
+    /*
+    grid.popback();
+    auto it = grid.begin();
+    
+    std::vector<Cell> tmp;
+    for (int i=0; i<width; i++){
+        Cell tmpCell(i,0);
+        tmpCell.attach(td);
+        tmp.emplace_back(tmpCell);
+    }
+    it = grid.insert(it, tmp);*/
+
+
 
 //this will add a Block object to the grid by modifying required cells
 bool Board::addBlock(Block *b){
@@ -130,7 +144,6 @@ void Board::rotateClockwise(Block *b){
     
     for (auto i: b->getPositions()){
         if (grid.at(i.y).at(i.x).getState() != State::NONE){
-            std::cout<<"CANNOT ROTATE JESUS"<<std::endl;
             b->rotateCounterclockwise();
             break;
         }

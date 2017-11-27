@@ -49,7 +49,7 @@ char Block::getBlockChar(){
     return this->blockChar;
 }
 
-std::vector<Pos> &Block::getPositions(){
+std::vector<Pos> Block::getPositions(){
     return this->position;
 }
 

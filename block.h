@@ -35,7 +35,7 @@ class Block{
     int getLevelCreated();
     bool getIsHeavy();
     char getBlockChar();
-    std::vector<Pos> &getPositions();
+    std::vector<Pos> getPositions();
     Pos getLeftCorner();
     int getWidth();
     int getHeight();

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include <fstream>
 #include <vector>
 #include "board.h"
 #include "Level.h"
@@ -10,6 +9,7 @@
 #include "Level_2.h"
 #include "Level_3.h"
 #include "Level_4.h"
+#include "commands.h"
 
 using namespace std;
 
@@ -18,16 +18,6 @@ using namespace std;
 const int width = 11;
 const int height = 18;
 
-void build_vector_from_file(vector<char> &my_vect, string f_name){
-    ifstream my_file (f_name);
-    if (my_file.is_open()){
-        char x;
-        while (my_file >> x){
-            my_vect.emplace_back(x);
-        }
-        my_file.close();
-    }
-}
 
 int main(int argc, const char * argv[]) {
     
@@ -37,7 +27,7 @@ int main(int argc, const char * argv[]) {
    
     //lets default to level 0 for now
     vector<char> sequence_txt_vector;
-    build_vector_from_file(sequence_txt_vector, "test.txt");
+    build_vector_from_file(sequence_txt_vector, "sequence.txt");
     
     l = new Level_0(sequence_txt_vector);
     

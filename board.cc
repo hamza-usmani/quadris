@@ -52,9 +52,10 @@ void Board::removeLine(int row){
         }
     }
     
-    /*for (auto &i: emptyBlocks){
-        //scoring done here
-    }*/
+    //scoring for completely removed blocks
+    for (auto &i: emptyBlocks){
+        score += ((i->getLevelCreated() + 1) * (i->getLevelCreated() + 1));
+    }
 }
 
 
@@ -191,15 +192,23 @@ void Board::dropBlock(Block *b){
         curY++;
     }
     
+    //check if any lines are full and increase counter for each block
+    int linesCleared = 0;
+    
     for (int i=0; i<height; i++){
         while(this->isRowFull(i)){
+            linesCleared++;
             this->removeLine(i);
         }
+        for (int j=0; j<width; j++){
+            if (grid.at(i).at(j).getCur() != nullptr){
+                grid.at(i).at(j).getCur()->increaseCount();
+            }
+        }
     }
+    //scoring for number of lines removed
+    score+= ((curLevel + linesCleared) * (curLevel + linesCleared));
     
-    /*while (this->isLastRowFull()){
-        this->removeLine();
-    }*/
 }
 
 

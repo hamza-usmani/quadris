@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
     
     Block *current = l->createBlock();
     Block *next = l->createBlock();
-    string cmd;
+    string user_cmd;
     
     while(true){
         if (!current){
@@ -40,7 +40,10 @@ int main(int argc, const char * argv[]) {
         mainBoard.addBlock(current);
         cout<<mainBoard;
         
-        cin>>cmd;
+        cin>>user_cmd;
+        //TODO: Detection of nums for multiplier
+        string cmd = autofill(user_cmd);
+
         if (cmd == "left") {
             mainBoard.moveBlockHorizontally(current, -1);
         }

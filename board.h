@@ -20,9 +20,9 @@ class Board{
     
     public:
     Board(int width, int height, int curLevel);
-    bool isLastRowFull();
+    bool isRowFull(int row);
     
-    void removeLine();
+    void removeLine(int row);
     bool addBlock(Block *b);
     void eraseBlock(Block *b);
     

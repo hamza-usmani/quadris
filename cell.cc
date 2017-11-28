@@ -38,10 +38,6 @@ Block *Cell::getCur(){
     return this->cur;
 }
 
-void Cell::setCur(Block *changeTo){
-    this->cur = changeTo;
-}
-
 void Cell::attach(Observer *o) {
     observers.emplace_back(o);
 }

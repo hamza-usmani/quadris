@@ -29,6 +29,7 @@ class Block{
     void moveHorizontally(int x);
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterclockwise() = 0;
+    void removePosition(Pos p);
     
     //getters
     int getCount();

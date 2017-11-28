@@ -17,37 +17,45 @@ Board::Board(int width, int height, int curLevel): width(width), height(height),
     }
 }
 
-bool Board::isLastRowFull(){
-    for (auto i: grid.at(height-1)){
+bool Board::isRowFull(int row){
+    for (auto &i: grid.at(row)){
         if (i.getState() == State::NONE) return false;
     }
     return true;
 }
 
 
-//this will remove the last row in the grid
-void Board::removeLine(){
-    for (auto i: grid.back()){
+//this will remove the row in the grid
+void Board::removeLine(int row){
+    std::vector<Block *> emptyBlocks;
+    
+    for (auto &i: grid.at(row)){
         if (i.getState() != State::NONE && i.getCur() != nullptr){
+            
             Block *b = i.getCur();
-            //b->
+            b->removePosition(i.getPosition());
+            
+            if (b->getPositions().empty()){
+                emptyBlocks.emplace_back(b);
+            }
+        }
+        i.clearCell();
+    }
+    
+    for (int i=row; i > 0; i--){
+        for (int j=0; j<width; j++){
+            Block *cur = grid.at(i-1).at(j).getCur();
+            grid.at(i).at(j).clearCell();
+            if (cur) {
+                grid.at(i).at(j).setBlock(cur);
+            }
         }
     }
     
+    /*for (auto &i: emptyBlocks){
+        //scoring done here
+    }*/
 }
-
-    /*
-    grid.popback();
-    auto it = grid.begin();
-    
-    std::vector<Cell> tmp;
-    for (int i=0; i<width; i++){
-        Cell tmpCell(i,0);
-        tmpCell.attach(td);
-        tmp.emplace_back(tmpCell);
-    }
-    it = grid.insert(it, tmp);*/
-
 
 
 //this will add a Block object to the grid by modifying required cells
@@ -182,6 +190,16 @@ void Board::dropBlock(Block *b){
         this->addBlock(b);
         curY++;
     }
+    
+    for (int i=0; i<height; i++){
+        while(this->isRowFull(i)){
+            this->removeLine(i);
+        }
+    }
+    
+    /*while (this->isLastRowFull()){
+        this->removeLine();
+    }*/
 }
 
 

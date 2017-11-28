@@ -1,6 +1,5 @@
 #include "block.h"
 #include <iostream>
-#include <algorithm>
 
 Block::Block(int levelCreated, char blockChar, int width, int height) {
     this->count = 0;
@@ -30,6 +29,18 @@ void Block::moveHorizontally(int x){
     this->leftCorner.x += x;
     for (auto &i: this->position){
         i.x += x;
+    }
+}
+
+//removes a position from the Block and returns true if the Block vector is now empty
+void Block::removePosition(Pos p){
+    int index = 0;
+    for (auto i: this->position){
+        if (i.x == p.x && i.y == p.y) {
+            this->position.erase(this->position.begin() +index);
+            break;
+        }
+        index ++;
     }
 }
 

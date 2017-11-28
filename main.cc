@@ -41,7 +41,14 @@ int main(int argc, const char * argv[]) {
         cout<<mainBoard;
         
         cin>>user_cmd;
-        //TODO: Detection of nums for multiplier
+
+
+        /*TODO: How are we going to handle spaces? 
+        currently, works for cmds such as 4lef but 4   lef breaks.
+        Perhaps we should use getline to take input from user
+        */
+        
+        int multiplier = strip_getNum(user_cmd);
         string cmd = autofill(user_cmd);
 
         if (cmd == "left") {

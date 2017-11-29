@@ -13,6 +13,7 @@ int main(int argc, const char * argv[]) {
     Level *l;
     int default_level = 0;
     string file = "test.txt";
+    int seed = 1;
     
     /* ----- COMMAND-LINE ARGUMENT HANDLING -----*/
     
@@ -21,7 +22,19 @@ int main(int argc, const char * argv[]) {
 			cout<<"DO NOT RUN GFX"<<endl;
 		}
         else if(string(argv[i]) == "-seed"){
-			srand(atoi(argv[i+1]));
+            try{
+                seed = stoi(argv[i+1]);
+                srand(seed);
+            }
+            catch(...){
+                seed = 1;
+                int tempSeed;
+                while (!(cin >> tempSeed)){
+                    cout<<"Please enter a valid seed number!"<<endl;
+                }
+                seed = tempSeed;
+            }
+			
 		}
         else if(string(argv[i]) == "-scriptfile"){
             ifstream tempfile{string(argv[i+1])};
@@ -29,12 +42,21 @@ int main(int argc, const char * argv[]) {
 				file = string(argv[i+1]);
 			}
             else{
-                cout<<"Invalid file, exiting game";
+                cout<<"Invalid file, please enter valid script file name!"<<std::endl;
                 return 1;
+                //loop until valid filename
             }
 		}
         else if(string(argv[i]) == "-startlevel"){
-			default_level = atoi(argv[i+1]);
+            try{
+                default_level = stoi(argv[i+1]);
+                srand(seed);
+            }
+            catch(...){
+                default_level = 0;
+                cout<<"Please enter a valid Level (0-4)!"<<endl;
+                //loop until valid level
+            }
 		}		
 	}
 	/* ----- END COMMAND-LINE ARGUMENT HANDLING ----- */
@@ -109,15 +131,8 @@ int main(int argc, const char * argv[]) {
             int lvl;
             cout<<"Enter what Level would you like to start the new game at: ";
             cin >> lvl;
-            if (lvl == 0){
-                string file;
-                cout<<"Enter the name of the sequence file you would like to use: ";
-                cin >> file;
-                l = buildLevel(lvl, file);
-            }
-            else {
-                l = buildLevel(lvl, file);
-            }
+            //loop until valid filename
+            l = buildLevel(lvl, file);
             mainBoard = Board(width, height, lvl);
             current = l->createBlock();
             next = l->createBlock();

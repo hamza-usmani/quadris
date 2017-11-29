@@ -30,8 +30,10 @@ class Board{
     void rotateClockwise(Block *b, int repeat);
     void rotateCounterclockwise(Block *b, int repeat);
     void dropBlock(Block *b);
-    
     void setNext(Block *b);
+    void levelUp(int n);
+    void LevelDown(int n);
+    
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

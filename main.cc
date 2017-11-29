@@ -58,6 +58,17 @@ int main(int argc, const char * argv[]) {
                 next = l->createBlock();
             }
         }
+        else if (cmd == "levelup"){
+            int lvl = l->getLevel();
+            l = buildLevel(lvl+multiplier);
+            mainBoard.levelUp(multiplier);
+            
+        }
+        else if (cmd == "leveldown"){
+            int lvl = l->getLevel();
+            l = buildLevel(lvl-multiplier);
+            mainBoard.LevelDown(multiplier);
+        }
         else if (cmd == "restart"){
             
         }

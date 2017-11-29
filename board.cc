@@ -223,6 +223,13 @@ void Board::setNext(Block *b){
     td->setNext(next);
 }
 
+void Board::levelUp(int n){
+    curLevel+= n;
+}
+void Board::LevelDown(int n){
+    curLevel-= n;
+}
+
 std::ostream &operator<<(std::ostream &out, const Board &b){
     out<<"Level: "<<b.curLevel<<std::endl;
     out<<"Score: "<<b.score<<std::endl;

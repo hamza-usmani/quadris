@@ -5,11 +5,10 @@
 #include <vector>
 
 class Level_0: public Level{
-    std::vector<char> sequence;
-    int index;
     public:
     Level_0(std::vector<char> &sequence);
     Block *createBlock() override;
+    void toggleRand() override;
 };
 
 #endif

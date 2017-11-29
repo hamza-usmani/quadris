@@ -9,8 +9,13 @@
 // Abstract base class
 class Level{
     int LevelDifficulty; //one of 0,1,2,3,4
-    
-    protected:
+
+    protected: //Ie subclasses can access, for style, move to private and provide setters/getters?
+    std::vector<char> sequence;
+    int index;
+    bool gen_rand;
+
+
     Block *create_I_Block();
     Block *create_J_Block();
     Block *create_L_Block();
@@ -19,9 +24,11 @@ class Level{
     Block *create_Z_Block();
     Block *create_T_Block();
 
+
     public:
-    Level(int LevelDifficulty);
+    Level(int LevelDifficulty, std::vector<char> sequence, int index, bool gen_rand);
     virtual Block *createBlock() = 0;
+    virtual void toggleRand() = 0;
     int getLevel();
     ~Level();
 };

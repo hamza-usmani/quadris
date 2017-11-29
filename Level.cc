@@ -7,7 +7,8 @@
 #include "zblock.h"
 #include "tblock.h"
 
-Level::Level(int LevelDifficulty): LevelDifficulty(LevelDifficulty) {}
+Level::Level(int LevelDifficulty, std::vector<char> sequence, int index, bool gen_rand):
+    LevelDifficulty(LevelDifficulty), sequence(sequence), index(index), gen_rand(gen_rand) {}
 
 int Level::getLevel(){
     return this->LevelDifficulty;
@@ -49,5 +50,3 @@ Block *Level::create_T_Block(){
 }
 
 Level::~Level() {}
-
-

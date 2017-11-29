@@ -1,7 +1,7 @@
 #include "Level_0.h"
 #include "block.h" 
 
-Level_0::Level_0(std::vector<char> &sequence): Level(0), sequence(sequence), index(0) { }
+Level_0::Level_0(std::vector<char> &sequence): Level(0, sequence, 0, false) { }
 
 Block *Level_0::createBlock(){
     if (index > sequence.size() - 1) return nullptr;
@@ -17,4 +17,6 @@ Block *Level_0::createBlock(){
     else if (curChar == 'z' || curChar == 'Z') return create_Z_Block();
     else return create_T_Block();
 }
+
+void Level_0::toggleRand() {}
 

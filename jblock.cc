@@ -88,4 +88,11 @@ void JBlock::rotateCounterclockwise(){
     
 }
 
-
+std::vector<std::vector<State>> JBlock::printBlock(){
+    std::vector<std::vector<State>> tmp;
+    std::vector<State> row1{State::J, State::NONE, State::NONE};
+    std::vector<State> row2{State::J, State::J, State::J};
+    tmp.emplace_back(row1);
+    tmp.emplace_back(row2);
+    return tmp;
+}

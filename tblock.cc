@@ -86,4 +86,12 @@ void TBlock::rotateCounterclockwise(){
     width = heightTmp;
 }
 
-
+std::vector<std::vector<State>> TBlock::printBlock(){
+    std::vector<std::vector<State>> tmp;
+    std::vector<State> row1{State::T, State::T, State::T};
+    std::vector<State> row2{State::NONE, State::T, State::NONE};
+    tmp.emplace_back(row1);
+    tmp.emplace_back(row2);
+    return tmp;
+    
+}

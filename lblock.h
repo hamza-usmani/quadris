@@ -13,6 +13,8 @@ class LBlock: public Block{
     LBlock(int levelCreated);
     void rotateClockwise() override;
     void rotateCounterclockwise() override;
+    
+    std::vector<std::vector<State>> printBlock() override;
 };
 
 #endif

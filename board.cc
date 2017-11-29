@@ -5,6 +5,7 @@
 Board::Board(int width, int height, int curLevel): width(width), height(height), curLevel(curLevel), score(0), highscore(0){
    TextDisplay *tmpDisplay = new TextDisplay(width, height);
    td = tmpDisplay;
+   next = nullptr;
     
     for (int j=0; j<height; j++){
         std::vector<Cell> tmp;
@@ -211,6 +212,10 @@ void Board::dropBlock(Block *b){
     
 }
 
+void Board::setNext(Block *b){
+    next = b;
+    td->setNext(next);
+}
 
 std::ostream &operator<<(std::ostream &out, const Board &b){
     out<<"Level: "<<b.curLevel<<std::endl;

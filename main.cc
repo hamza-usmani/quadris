@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include "board.h"
 #include "Level.h"
@@ -30,7 +31,7 @@ int main(int argc, const char * argv[]) {
     
     Block *current = l->createBlock();
     Block *next = l->createBlock();
-    string user_cmd;
+    
     
     while(true){
         if (!current){
@@ -40,25 +41,18 @@ int main(int argc, const char * argv[]) {
         mainBoard.addBlock(current);
         cout<<mainBoard;
         
-        cin>>user_cmd;
-
-
-        /*TODO: How are we going to handle spaces? 
-        currently, works for cmds such as 4lef but 4   lef breaks.
-        Perhaps we should use getline to take input from user
-        */
+        string cmd;
+        int multiplier = 1;
+        readCommand(cin, cmd, multiplier);
         
-        int multiplier = strip_getNum(user_cmd);
-        string cmd = autofill(user_cmd);
-
         if (cmd == "left") {
-            mainBoard.moveBlockHorizontally(current, -1);
+            mainBoard.moveBlockHorizontally(current, -multiplier);
         }
         else if (cmd == "right") {
-            mainBoard.moveBlockHorizontally(current, 1);
+            mainBoard.moveBlockHorizontally(current, multiplier);
         }
         else if (cmd == "down") {
-            mainBoard.moveDown(current, 1);
+            mainBoard.moveDown(current, multiplier);
         }
         else if (cmd == "clockwise") {
             mainBoard.rotateClockwise(current);
@@ -67,10 +61,17 @@ int main(int argc, const char * argv[]) {
              mainBoard.rotateCounterclockwise(current);
         }
         else if (cmd == "drop") {
-            mainBoard.dropBlock(current);
-            current = next;
-            next = l->createBlock();
+            for (int i=0; i< multiplier; i++){
+                if (!current) break;
+                mainBoard.dropBlock(current);
+                current = next;
+                next = l->createBlock();
+            }
         }
+        else if (cmd == "error"){
+            cout<<"Invalid Command";
+        }
+        cout<<std::endl;
     }
     
     return 0;

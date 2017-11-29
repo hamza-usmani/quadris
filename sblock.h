@@ -11,6 +11,8 @@ class SBlock: public Block{
     SBlock(int levelCreated);
     void rotateClockwise() override;
     void rotateCounterclockwise() override;
+    
+    std::vector<std::vector<State>> printBlock() override;
 };
 
 #endif

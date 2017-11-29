@@ -16,23 +16,22 @@ class Board{
     int score;
     int highscore;
     TextDisplay *td;
-    //vector<char> nextBlock;
+    Block *next;
     
     public:
     Board(int width, int height, int curLevel);
-    bool isRowFull(int row);
     
+    bool isRowFull(int row);
     void removeLine(int row);
     bool addBlock(Block *b);
     void eraseBlock(Block *b);
-    
     void moveDown(Block *b, int n);
     void moveBlockHorizontally(Block *b, int x);
     void rotateClockwise(Block *b);
     void rotateCounterclockwise(Block *b);
     void dropBlock(Block *b);
     
-    
+    void setNext(Block *b);
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

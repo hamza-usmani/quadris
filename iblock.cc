@@ -42,3 +42,11 @@ void IBlock::rotateCounterclockwise(){
     this->rotateClockwise();
 }
 
+
+std::vector<std::vector<State>> IBlock::printBlock(){
+    std::vector<std::vector<State>> tmp;
+    std::vector<State> row1{State::I, State::I, State::I, State::I};
+    tmp.emplace_back(row1);
+    return tmp;
+}
+

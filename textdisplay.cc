@@ -2,10 +2,30 @@
 #include "textdisplay.h"
 #include "cell.h"
 
-TextDisplay::TextDisplay(int width, int height): width(width), height(height) {
+TextDisplay::TextDisplay(int width, int height): width(width), height(height), next(nullptr) {
     for (int i=0; i<height; i++){
         std::vector<char> tmp(width, ' ');
         display.emplace_back(tmp);
+    }
+}
+
+void TextDisplay::setNext(Block *b){
+    next = b;
+}
+
+void TextDisplay::printNext(std::ostream &out, std::vector<std::vector<State>> nextBlock){
+    for (auto i: nextBlock){
+        for (auto j: i){
+            if (j == State::NONE) out<< ' ';
+            else if (j== State::I) out<<'I';
+            else if (j == State::J) out<< 'J';
+            else if (j == State::L) out<< 'L';
+            else if (j == State::O) out<< 'O';
+            else if (j == State::S) out<< 'S';
+            else if (j == State::Z) out<< 'Z';
+            else if (j == State::T) out<< 'T';
+        }
+        out<<std::endl;
     }
 }
 

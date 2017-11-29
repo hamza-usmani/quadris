@@ -41,3 +41,12 @@ void SBlock::rotateCounterclockwise(){
     this->rotateClockwise();
 }
 
+
+std::vector<std::vector<State>> SBlock::printBlock(){
+    std::vector<std::vector<State>> tmp;
+    std::vector<State> row1{State::NONE, State::S, State::S};
+    std::vector<State> row2{State::S, State::S, State::NONE};
+    tmp.emplace_back(row1);
+    tmp.emplace_back(row2);
+    return tmp;
+}

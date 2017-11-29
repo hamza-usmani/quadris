@@ -1,7 +1,6 @@
 #ifndef block_h
 #define block_h
 
-#include <vector>
 #include "cell.h"
 #include "Level.h"
 
@@ -40,7 +39,9 @@ class Block{
     Pos getLeftCorner();
     int getWidth();
     int getHeight();
-
+    
+    //printing and output
+    virtual std::vector<std::vector<State>> printBlock() = 0;
 };
 
 #endif

@@ -8,6 +8,8 @@ class OBlock: public Block{
     OBlock(int levelCreated);
     void rotateClockwise() override;
     void rotateCounterclockwise() override;
+    
+    std::vector<std::vector<State>> printBlock() override;
 };
 
 #endif

@@ -86,3 +86,12 @@ void LBlock::rotateCounterclockwise(){
     
     
 }
+
+std::vector<std::vector<State>> LBlock::printBlock(){
+    std::vector<std::vector<State>> tmp;
+    std::vector<State> row1{State::NONE, State::NONE, State::L};
+    std::vector<State> row2{State::L, State::L, State::L};
+    tmp.emplace_back(row1);
+    tmp.emplace_back(row2);
+    return tmp;
+}

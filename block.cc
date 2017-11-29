@@ -1,5 +1,4 @@
 #include "block.h"
-#include <iostream>
 
 Block::Block(int levelCreated, char blockChar, int width, int height) {
     this->count = 0;
@@ -74,6 +73,3 @@ int Block::getWidth(){
 int Block::getHeight(){
     return this->height;
 }
-
-
-

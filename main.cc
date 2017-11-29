@@ -29,12 +29,18 @@ int main(int argc, const char * argv[]) {
             catch(...){
                 seed = 1;
                 int tempSeed;
-                while (!(cin >> tempSeed)){
+               
+                while (true) {
                     cout<<"Please enter a valid seed number!"<<endl;
+                    cin >>seed;
+                    if (cin.fail()){
+                        cin.clear();
+                        cout << "Re-enter a valid seed! " << endl;
+                    }
+                    else break;
                 }
                 seed = tempSeed;
             }
-			
 		}
         else if(string(argv[i]) == "-scriptfile"){
             ifstream tempfile{string(argv[i+1])};

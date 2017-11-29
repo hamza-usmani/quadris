@@ -27,8 +27,8 @@ class Board{
     void eraseBlock(Block *b);
     void moveDown(Block *b, int n);
     void moveBlockHorizontally(Block *b, int x);
-    void rotateClockwise(Block *b);
-    void rotateCounterclockwise(Block *b);
+    void rotateClockwise(Block *b, int repeat);
+    void rotateCounterclockwise(Block *b, int repeat);
     void dropBlock(Block *b);
     
     void setNext(Block *b);

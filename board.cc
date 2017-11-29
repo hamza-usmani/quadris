@@ -148,31 +148,37 @@ void Board::moveBlockHorizontally(Block *b, int x){ //if no number recieved, ie 
 }
 
 //rotate clockwise
-void Board::rotateClockwise(Block *b){
-    this->eraseBlock(b);
-    b->rotateClockwise();
-    
-    for (auto i: b->getPositions()){
-        if (grid.at(i.y).at(i.x).getState() != State::NONE){
-            b->rotateCounterclockwise();
-            break;
+void Board::rotateClockwise(Block *b, int repeat){
+    while (repeat > 0){
+        this->eraseBlock(b);
+        b->rotateClockwise();
+        
+        for (auto i: b->getPositions()){
+            if (grid.at(i.y).at(i.x).getState() != State::NONE){
+                b->rotateCounterclockwise();
+                break;
+            }
         }
+        this->addBlock(b);
+        repeat--;
     }
-    this->addBlock(b);
 }
 
 //rotate counterclockwise
-void Board::rotateCounterclockwise(Block *b){
-    this->eraseBlock(b);
-    b->rotateCounterclockwise();
-    
-    for (auto i: b->getPositions()){
-        if (grid.at(i.y).at(i.x).getState() != State::NONE){
-            b->rotateClockwise();
-            break;
+void Board::rotateCounterclockwise(Block *b, int repeat){
+    while (repeat > 0){
+        this->eraseBlock(b);
+        b->rotateCounterclockwise();
+        
+        for (auto i: b->getPositions()){
+            if (grid.at(i.y).at(i.x).getState() != State::NONE){
+                b->rotateClockwise();
+                break;
+            }
         }
+        this->addBlock(b);
+        repeat--;
     }
-    this->addBlock(b);
 }
 
 //drop a block to the bottom, ie. place it

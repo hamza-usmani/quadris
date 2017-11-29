@@ -56,10 +56,10 @@ int main(int argc, const char * argv[]) {
             mainBoard.moveDown(current, multiplier);
         }
         else if (cmd == "clockwise") {
-            mainBoard.rotateClockwise(current);
+            mainBoard.rotateClockwise(current, multiplier);
         }
         else if (cmd == "counterclockwise") {
-             mainBoard.rotateCounterclockwise(current);
+             mainBoard.rotateCounterclockwise(current, multiplier);
         }
         else if (cmd == "drop") {
             for (int i=0; i< multiplier; i++){
@@ -70,7 +70,7 @@ int main(int argc, const char * argv[]) {
             }
         }
         else if (cmd == "error"){
-            cout<<"Invalid Command";
+            cout<<"Invalid Command"<<std::endl;
         }
         cout<<std::endl;
     }

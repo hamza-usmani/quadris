@@ -10,39 +10,34 @@
 
 
 int main(int argc, const char * argv[]) {
-	
     Level *l;
-   
-    //lets default to level 0 for now, and file "test.txt"
     int default_level = 0;
-    string file = "sequence.txt";
-    /*
-	----- COMMAND-LINE ARGUMENT HANDLING -----
-	Goes through all supplied command line 
-	arguments ignoring any irrelevant args
-	TODO: Assert numerics supplied; we need to 
-	talk about error handling next time we meet
-	*/
-	for (int i = 1; i<argc; ++i){ //going through all the arguments
+    string file = "test.txt";
+    
+    /* ----- COMMAND-LINE ARGUMENT HANDLING -----*/
+    
+	for (int i = 1; i<argc; ++i){
 		if(string(argv[i]) == "-text"){
 			cout<<"DO NOT RUN GFX"<<endl;
-		}else if(string(argv[i]) == "-seed"){
-			srand(atoi(argv[i]));
-		}else if(string(argv[i]) == "-scriptfile"){
-			file = string(argv[i+1]);
-			/*TODO: Check if successfull open prior to assign?
-			if(string(argv[i+1]).open()){
+		}
+        else if(string(argv[i]) == "-seed"){
+			srand(atoi(argv[i+1]));
+		}
+        else if(string(argv[i]) == "-scriptfile"){
+            ifstream tempfile{string(argv[i+1])};
+			if(tempfile){
 				file = string(argv[i+1]);
 			}
-			*/
-		}else if(string(argv[i]) == "-startlevel"){
+            else{
+                cout<<"Invalid file, exiting game";
+                return 1;
+            }
+		}
+        else if(string(argv[i]) == "-startlevel"){
 			default_level = atoi(argv[i+1]);
 		}		
 	}
-	/*
-	----- END COMMAND-LINE ARGUMENT HANDLING -----
-	*/
-    //----------------------------------------------------
+	/* ----- END COMMAND-LINE ARGUMENT HANDLING ----- */
     
     l = buildLevel(default_level, file);
     Board mainBoard(width, height, l->getLevel());
@@ -55,6 +50,10 @@ int main(int argc, const char * argv[]) {
         if (!current){
             cout<<mainBoard;
             break;
+        }
+        if (!mainBoard.canPlace(current)){
+            cout<<"No Board space for new block. Game Over!"<<std::endl;
+            return 1;
         }
         mainBoard.addBlock(current);
         cout<<mainBoard;

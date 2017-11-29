@@ -16,7 +16,7 @@ Level_1::Level_1(): Level(1), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob
 
 Block *Level_1::createBlock(){
     int rand_num = rand() % denum + 1; // Chooses a random number between 1-denum (12 for this case)
-    std::cout<<"rand_num is: "<<rand_num<<std::endl;
+    //std::cout<<"rand_num is: "<<rand_num<<std::endl;
     if (rand_num <= I_prob){ // <= 2 (2/12)
         return create_I_Block();
     } else if (rand_num <= I_prob + J_prob){ // beween 3 and 4 (2/12)

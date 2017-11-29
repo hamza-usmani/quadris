@@ -22,8 +22,9 @@ class Board{
     Board(int width, int height, int curLevel);
     
     bool isRowFull(int row);
+    bool canPlace(Block *b);
     void removeLine(int row);
-    bool addBlock(Block *b);
+    void addBlock(Block *b);
     void eraseBlock(Block *b);
     void moveDown(Block *b, int n);
     void moveBlockHorizontally(Block *b, int x);

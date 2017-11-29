@@ -25,6 +25,13 @@ bool Board::isRowFull(int row){
     return true;
 }
 
+bool Board::canPlace(Block *b){
+    for (auto i: b->getPositions()){
+        if (grid.at(i.y).at(i.x).getState() != State::NONE) return false;
+    }
+    return true;
+}
+
 
 //this will remove the row in the grid
 void Board::removeLine(int row){
@@ -61,11 +68,10 @@ void Board::removeLine(int row){
 
 
 //this will add a Block object to the grid by modifying required cells
-bool Board::addBlock(Block *b){
+void Board::addBlock(Block *b){
     for (auto i: b->getPositions()){
         grid.at(i.y).at(i.x).setBlock(b);
     }
-    return true;
 }
 
 

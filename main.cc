@@ -16,31 +16,19 @@ int main(int argc, const char * argv[]) {
     int seed = 1;
     
     /* ----- COMMAND-LINE ARGUMENT HANDLING -----*/
-    
 	for (int i = 1; i<argc; ++i){
 		if(string(argv[i]) == "-text"){
-			cout<<"DO NOT RUN GFX"<<endl;
+			cout<<"Quadris will now run in text-only mode."<<endl;
 		}
         else if(string(argv[i]) == "-seed"){
             try{
                 seed = stoi(argv[i+1]);
-                srand(seed);
             }
             catch(...){
                 seed = 1;
-                int tempSeed;
-               
-                while (true) {
-                    cout<<"Please enter a valid seed number!"<<endl;
-                    cin >>seed;
-                    if (cin.fail()){
-                        cin.clear();
-                        cout << "Re-enter a valid seed! " << endl;
-                    }
-                    else break;
-                }
-                seed = tempSeed;
+                cout<<"You entered an invalid seed number! The seed has been set to default Seed 1."<<std::endl;
             }
+            srand(seed);
 		}
         else if(string(argv[i]) == "-scriptfile"){
             ifstream tempfile{string(argv[i+1])};
@@ -48,20 +36,17 @@ int main(int argc, const char * argv[]) {
 				file = string(argv[i+1]);
 			}
             else{
-                cout<<"Invalid file, please enter valid script file name!"<<std::endl;
+                cout<<"You entered an invalid script file, the game will now exit."<<std::endl;
                 return 1;
-                //loop until valid filename
             }
 		}
         else if(string(argv[i]) == "-startlevel"){
             try{
                 default_level = stoi(argv[i+1]);
-                srand(seed);
             }
             catch(...){
                 default_level = 0;
-                cout<<"Please enter a valid Level (0-4)!"<<endl;
-                //loop until valid level
+                cout<<"You enetered an invalid Level. The game will run in default Level 0."<<endl;
             }
 		}		
 	}
@@ -135,11 +120,15 @@ int main(int argc, const char * argv[]) {
         
         else if (cmd == "restart"){
             int lvl;
-            cout<<"Enter what Level would you like to start the new game at: ";
+            cout<<"Enter what Level (0-4) would you like to start the new game at: ";
             cin >> lvl;
-            //loop until valid filename
-            l = buildLevel(lvl, file);
-            mainBoard = Board(width, height, lvl);
+            if (cin.fail()){
+                lvl = 0;
+                cout<<"You enetered an invalid Level. The game will run in default Level 0."<<endl;
+            }
+            default_level = lvl;
+            l = buildLevel(default_level, file);
+            mainBoard = Board(width, height, default_level);
             current = l->createBlock();
             next = l->createBlock();
         }

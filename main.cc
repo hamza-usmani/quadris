@@ -71,7 +71,7 @@ int main(int argc, const char * argv[]) {
         
         mainBoard.addBlock(current);
         cout<<mainBoard;
-        
+
         string cmd;
         int multiplier = 1;
         readCommand(cin, cmd, multiplier);
@@ -109,13 +109,14 @@ int main(int argc, const char * argv[]) {
             int lvl = l->getLevel();
             l = buildLevel(lvl+multiplier, file);
             mainBoard.levelUp(multiplier);
-            
+            if (lvl < 3 && l->getLevel() > 2) next->toggleHeavy();
         }
         
         else if (cmd == "leveldown"){
             int lvl = l->getLevel();
             l = buildLevel(lvl-multiplier, file);
             mainBoard.LevelDown(multiplier);
+            if (lvl > 2 && l->getLevel() < 3) next->toggleHeavy();
         }
         
         else if (cmd == "restart"){

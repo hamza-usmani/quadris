@@ -43,6 +43,11 @@ void Block::removePosition(Pos p){
     }
 }
 
+void Block::toggleHeavy(){
+    if (this->isHeavy) this->isHeavy = false;
+    else this->isHeavy = true;
+}
+
 int Block::getCount(){
     return this->count;
 }

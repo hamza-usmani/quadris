@@ -153,6 +153,10 @@ void Board::moveBlockHorizontally(Block *b, int x){ //if no number recieved, ie 
             curX--;
         }
     }
+    
+    if (b->getIsHeavy()){
+        moveDown(b, 1);
+    }
 }
 
 //rotate clockwise

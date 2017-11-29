@@ -5,30 +5,19 @@
 #include <sstream>
 #include <vector>
 #include "board.h"
-#include "Level.h"
-#include "Level_0.h"
-#include "Level_1.h"
-#include "Level_2.h"
-#include "Level_3.h"
-#include "Level_4.h"
 #include "commands.h"
-
-using namespace std;
-
-const int width = 11;
-const int height = 18;
 
 int main(int argc, const char * argv[]) {
     
-    //currently mainBoard is initiated with fixed level 0
-    Board mainBoard(width, height, 0);
     Level *l;
    
-    //lets default to level 0 for now
-    vector<char> sequence_txt_vector;
-    build_vector_from_file(sequence_txt_vector, "test.txt");
-    l = new Level_0(sequence_txt_vector);
+    //lets default to level 0 for now, and file "test.txt"
+    int n = 0;
+    string file = "test.txt";
+    //----------------------------------------------------
     
+    l = buildLevel(n, file);
+    Board mainBoard(width, height, l->getLevel());
     Block *current = l->createBlock();
     Block *next = l->createBlock();
     
@@ -68,6 +57,9 @@ int main(int argc, const char * argv[]) {
                 current = next;
                 next = l->createBlock();
             }
+        }
+        else if (cmd == "restart"){
+            
         }
         else if (cmd == "error"){
             cout<<"Invalid Command"<<std::endl;

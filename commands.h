@@ -3,7 +3,17 @@
 
 #include <string>
 #include <iostream>
+#include "Level.h"
+#include "Level_0.h"
+#include "Level_1.h"
+#include "Level_2.h"
+#include "Level_3.h"
+#include "Level_4.h"
+
 using namespace std;
+
+const int width = 11;
+const int height = 18;
 
 std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint"};
 
@@ -18,6 +28,27 @@ void build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
     }
 }
 
+Level *buildLevel(int n, string f_name = ""){
+    switch (n){
+        case 1:
+            return new Level_1();
+            break;
+        case 2:
+            return new Level_2();
+            break;
+        case 3:
+            return new Level_3();
+            break;
+        case 4:
+            return new Level_4();
+            break;
+        default:
+            vector<char> sequence_txt_vector;
+            build_vector_from_file(sequence_txt_vector, f_name);
+            return new Level_0(sequence_txt_vector);
+            break;
+    }
+}
 
 std::string autofill(std::string &user_cmd){
 	std::vector<std::string> Workng_CMD_List = Master_CMD_List;

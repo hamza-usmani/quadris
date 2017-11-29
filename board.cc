@@ -214,7 +214,7 @@ void Board::dropBlock(Block *b){
         }
     }
     //scoring for number of lines removed
-    score+= ((curLevel + linesCleared) * (curLevel + linesCleared));
+    if (linesCleared > 0) score+= ((curLevel + linesCleared) * (curLevel + linesCleared));
     
 }
 

@@ -32,8 +32,9 @@ int main(int argc, const char * argv[]) {
     Block *current = l->createBlock();
     Block *next = l->createBlock();
     
-    
     while(true){
+        mainBoard.setNext(next);
+        
         if (!current){
             cout<<mainBoard;
             break;

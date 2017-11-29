@@ -13,7 +13,9 @@ void TextDisplay::setNext(Block *b){
     next = b;
 }
 
-void TextDisplay::printNext(std::ostream &out, std::vector<std::vector<State>> nextBlock){
+void TextDisplay::printNext(std::ostream &out){
+    if (!next) return;
+    std::vector<std::vector<State>> nextBlock = next->printBlock();
     for (auto i: nextBlock){
         for (auto j: i){
             if (j == State::NONE) out<< ' ';
@@ -44,7 +46,7 @@ void TextDisplay::notify(Cell &whoFrom){
 }
 
 
-std::ostream &operator<<(std::ostream &out, const TextDisplay &td){
+std::ostream &operator<<(std::ostream &out, TextDisplay &td){
     for (int i=0; i<td.width; i++) out<<"-";
     out<<std::endl;
     for (auto i: td.display){
@@ -54,6 +56,8 @@ std::ostream &operator<<(std::ostream &out, const TextDisplay &td){
         out<<std::endl;
     }
     for (int i=0; i<td.width; i++) out<<"-";
+    out<<std::endl<<"Next:"<<std::endl;
+    td.printNext(out);
     out<<std::endl;
     return out;
 }

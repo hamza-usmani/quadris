@@ -55,6 +55,7 @@ int main(int argc, const char * argv[]) {
             cout<<"No Board space for new block. Game Over!"<<std::endl;
             return 1;
         }
+        
         mainBoard.addBlock(current);
         cout<<mainBoard;
         
@@ -93,14 +94,14 @@ int main(int argc, const char * argv[]) {
         
         else if (cmd == "levelup"){
             int lvl = l->getLevel();
-            l = buildLevel(lvl+multiplier);
+            l = buildLevel(lvl+multiplier, file);
             mainBoard.levelUp(multiplier);
             
         }
         
         else if (cmd == "leveldown"){
             int lvl = l->getLevel();
-            l = buildLevel(lvl-multiplier);
+            l = buildLevel(lvl-multiplier, file);
             mainBoard.LevelDown(multiplier);
         }
         
@@ -115,7 +116,7 @@ int main(int argc, const char * argv[]) {
                 l = buildLevel(lvl, file);
             }
             else {
-                l = buildLevel(lvl);
+                l = buildLevel(lvl, file);
             }
             mainBoard = Board(width, height, lvl);
             current = l->createBlock();

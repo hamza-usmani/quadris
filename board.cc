@@ -27,7 +27,7 @@ bool Board::isRowFull(int row){
 
 bool Board::canPlace(Block *b){
     for (auto i: b->getPositions()){
-        if (grid.at(i.y).at(i.x).getState() != State::NONE) return false;
+        if (grid.at(i.y).at(i.x).getCur() != b && grid.at(i.y).at(i.x).getState() != State::NONE) return false;
     }
     return true;
 }

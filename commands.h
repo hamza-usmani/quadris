@@ -28,7 +28,7 @@ void build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
     }
 }
 
-Level *buildLevel(int n, string f_name = ""){
+Level *buildLevel(int n, string f_name){
     switch (n){
         case 1:
             return new Level_1();

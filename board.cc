@@ -68,12 +68,14 @@ bool Board::addBlock(Block *b){
     return true;
 }
 
+
 //this will simply erase a Block objects positions from grid
 void Board::eraseBlock(Block *b){
     for (auto i: b->getPositions()){
         grid.at(i.y).at(i.x).clearCell();
     }
 }
+
 
 //will move a block down
 void Board::moveDown(Block *b, int y){ //if no number recieved, ie "down" pass in y = 1
@@ -215,7 +217,6 @@ void Board::dropBlock(Block *b){
     }
     //scoring for number of lines removed
     if (linesCleared > 0) score+= ((curLevel + linesCleared) * (curLevel + linesCleared));
-    
 }
 
 void Board::setNext(Block *b){

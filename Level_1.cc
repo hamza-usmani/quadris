@@ -33,8 +33,5 @@ Block *Level_1::createBlock(){
     } else{
         return create_T_Block(); //between 11 and 12 (2/12)
     }
-
-
-
 }
 

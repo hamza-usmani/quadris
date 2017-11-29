@@ -38,18 +38,23 @@ int main(int argc, const char * argv[]) {
         if (cmd == "left") {
             mainBoard.moveBlockHorizontally(current, -multiplier);
         }
+        
         else if (cmd == "right") {
             mainBoard.moveBlockHorizontally(current, multiplier);
         }
+        
         else if (cmd == "down") {
             mainBoard.moveDown(current, multiplier);
         }
+        
         else if (cmd == "clockwise") {
             mainBoard.rotateClockwise(current, multiplier);
         }
+        
         else if (cmd == "counterclockwise") {
              mainBoard.rotateCounterclockwise(current, multiplier);
         }
+        
         else if (cmd == "drop") {
             for (int i=0; i< multiplier; i++){
                 if (!current) break;
@@ -58,23 +63,42 @@ int main(int argc, const char * argv[]) {
                 next = l->createBlock();
             }
         }
+        
         else if (cmd == "levelup"){
             int lvl = l->getLevel();
             l = buildLevel(lvl+multiplier);
             mainBoard.levelUp(multiplier);
             
         }
+        
         else if (cmd == "leveldown"){
             int lvl = l->getLevel();
             l = buildLevel(lvl-multiplier);
             mainBoard.LevelDown(multiplier);
         }
+        
         else if (cmd == "restart"){
-            
+            int lvl;
+            cout<<"Enter what Level would you like to start the new game at: ";
+            cin >> lvl;
+            if (lvl == 0){
+                string file;
+                cout<<"Enter the name of the sequence file you would like to use: ";
+                cin >> file;
+                l = buildLevel(lvl, file);
+            }
+            else {
+                l = buildLevel(lvl);
+            }
+            mainBoard = Board(width, height, lvl);
+            current = l->createBlock();
+            next = l->createBlock();
         }
+        
         else if (cmd == "error"){
             cout<<"Invalid Command"<<std::endl;
         }
+        
         cout<<std::endl;
     }
     

@@ -12,8 +12,12 @@
 
 using namespace std;
 
+//GLOBAL VARIABLES
 const int width = 11;
 const int height = 18;
+int default_level = 0;
+string file = "test.txt";
+int seed = 1;
 
 std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint"};
 
@@ -72,8 +76,11 @@ std::string autofill(std::string &user_cmd){
 void readCommand(istream &in, string &cmd, int &multiplier){
     string user_cmd;
     string numString;
+    string tempFile;
     
     in >> user_cmd;
+    if (user_cmd == "sequence" || user_cmd == "norandom") in >> tempFile;
+    
     bool letterFound = false;
     
     for (int i=0; i< user_cmd.length(); i++){
@@ -86,6 +93,7 @@ void readCommand(istream &in, string &cmd, int &multiplier){
         }
     }
     
+    file = tempFile;
     if (!numString.empty()){
         multiplier = stoi(numString);
     }

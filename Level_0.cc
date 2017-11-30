@@ -18,5 +18,4 @@ Block *Level_0::createBlock(){
     else return create_T_Block();
 }
 
-void Level_0::toggleRand() {}
 

@@ -12,7 +12,7 @@ Since there is no end user interaction with this determintation, it is up to the
 assert each block probability sums to denum. Failure to do so may result in undefined behaviour. 
 */
 
-Level_2::Level_2(): Level(2, sequence, 0, true), denum(7), I_prob(1), J_prob(1), L_prob(1), O_prob(1), S_prob(1), Z_prob(1), T_prob(1) { }
+Level_2::Level_2(): Level(2, std::vector<char>(), 0, true), denum(7), I_prob(1), J_prob(1), L_prob(1), O_prob(1), S_prob(1), Z_prob(1), T_prob(1) { }
 
 // TODO: Possibility to throw exception on poorly built object? (Shouldn't be necessarys)
 
@@ -50,9 +50,3 @@ Block *Level_2::createBlock(){
     }
 }
 
-void Level_2::toggleRand() {
-    if (gen_rand)
-        gen_rand = false;
-    else
-        gen_rand = true;
-}

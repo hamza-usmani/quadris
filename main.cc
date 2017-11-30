@@ -11,9 +11,6 @@
 
 int main(int argc, const char * argv[]) {
     Level *l;
-    int default_level = 0;
-    string file = "test.txt";
-    int seed = 1;
     
     /* ----- COMMAND-LINE ARGUMENT HANDLING -----*/
 	for (int i = 1; i<argc; ++i){
@@ -131,6 +128,17 @@ int main(int argc, const char * argv[]) {
             l = buildLevel(default_level, file);
             mainBoard = Board(width, height, default_level);
             current = l->createBlock();
+            next = l->createBlock();
+        }
+        else if (cmd == "norandom"){
+            vector<char> tmp;
+            build_vector_from_file(tmp, file);
+            l->randomOff(tmp);
+            next = l->createBlock();
+        }
+        
+        else if (cmd == "random"){
+            l->randomOn();
             next = l->createBlock();
         }
         

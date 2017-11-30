@@ -28,8 +28,9 @@ class Level{
     public:
     Level(int LevelDifficulty, std::vector<char> sequence, int index, bool gen_rand);
     virtual Block *createBlock() = 0;
-    virtual void toggleRand() = 0;
     int getLevel();
+    void randomOn();
+    void randomOff(const std::vector<char> vec);
     ~Level();
 };
 

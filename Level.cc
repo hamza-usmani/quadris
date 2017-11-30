@@ -49,4 +49,17 @@ Block *Level::create_T_Block(){
     return t;
 }
 
+
+void Level::randomOn() {
+    if (LevelDifficulty == 0) return;
+    gen_rand = true;
+}
+
+void Level::randomOff(const std::vector<char> vec) {
+    if (LevelDifficulty == 0) return;
+    sequence = vec;
+    index = 0;
+    gen_rand = false;
+}
+
 Level::~Level() {}

@@ -16,7 +16,6 @@ class Level_3: public Level{
     public:
     Level_3();
     Block *createBlock() override;
-    void toggleRand() override;
 };
 
 #endif

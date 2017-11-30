@@ -12,7 +12,7 @@ Since there is no end user interaction with this determintation, it is up to the
 assert each block probability sums to denum. Failure to do so may result in undefined behaviour. 
 */
 
-Level_1::Level_1(): Level(1, sequence, 0, true), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob(2), S_prob(1), Z_prob(1), T_prob(2) { }
+Level_1::Level_1(): Level(1, std::vector<char>(),0, true), denum(12), I_prob(2), J_prob(2), L_prob(2), O_prob(2), S_prob(1), Z_prob(1), T_prob(2) { }
 
 Block *Level_1::createBlock(){
     if (gen_rand){
@@ -48,10 +48,4 @@ Block *Level_1::createBlock(){
         else return create_T_Block();
     }
 }
-
-void Level_1::toggleRand() {
-    if (gen_rand)
-        gen_rand = false;
-    else
-        gen_rand = true;
-}
+    

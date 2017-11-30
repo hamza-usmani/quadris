@@ -8,7 +8,6 @@ class Level_0: public Level{
     public:
     Level_0(std::vector<char> &sequence);
     Block *createBlock() override;
-    void toggleRand() override;
 };
 
 #endif

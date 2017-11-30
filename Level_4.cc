@@ -12,7 +12,7 @@ Since there is no end user interaction with this determintation, it is up to the
 assert each block probability sums to denum. Failure to do so may result in undefined behaviour. 
 */
 
-Level_4::Level_4(): Level(4, sequence, 0, true), denum(9), I_prob(1), J_prob(1), L_prob(1), O_prob(1), S_prob(2), Z_prob(2), T_prob(1) { }
+Level_4::Level_4(): Level(4, std::vector<char>() , 0, true), denum(9), I_prob(1), J_prob(1), L_prob(1), O_prob(1), S_prob(2), Z_prob(2), T_prob(1) { }
 
 // TODO: Possibility to throw exception on poorly built object? (Shouldn't be necessarys)
 
@@ -50,9 +50,4 @@ Block *Level_4::createBlock(){
     }
 }
 
-void Level_4::toggleRand() {
-    if (gen_rand)
-        gen_rand = false;
-    else
-        gen_rand = true;
-}
+

@@ -16,7 +16,7 @@ using namespace std;
 const int width = 11;
 const int height = 18;
 int default_level = 0;
-string file = "test.txt";
+string file = "sequence.txt";
 int seed = 1;
 
 std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint"};

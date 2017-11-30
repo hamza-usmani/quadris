@@ -6,6 +6,7 @@
 #include "sblock.h"
 #include "zblock.h"
 #include "tblock.h"
+#include <string>
 
 Level::Level(int LevelDifficulty, std::vector<char> sequence, int index, bool gen_rand):
     LevelDifficulty(LevelDifficulty), sequence(sequence), index(index), gen_rand(gen_rand) {}
@@ -60,6 +61,17 @@ void Level::randomOff(const std::vector<char> vec) {
     sequence = vec;
     index = 0;
     gen_rand = false;
+}
+
+Block *Level::changeCurrentBlock(std::string blockChar){
+    if (blockChar == "I") return create_I_Block();
+    else if (blockChar == "J") return create_J_Block();
+    else if (blockChar == "L") return create_L_Block();
+    else if (blockChar == "O") return create_O_Block();
+    else if (blockChar == "S") return create_S_Block();
+    else if (blockChar == "Z") return create_Z_Block();
+    else if (blockChar == "T") return create_T_Block();
+    else return nullptr;
 }
 
 Level::~Level() {}

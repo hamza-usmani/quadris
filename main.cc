@@ -73,7 +73,14 @@ int main(int argc, const char * argv[]) {
         int multiplier = 1;
         readCommand(cin, cmd, multiplier);
         
-        if (cmd == "left") {
+        if (cmd.length() == 1){
+            mainBoard.eraseBlock(current);
+            current = l->changeCurrentBlock(cmd);
+            mainBoard.addBlock(current);
+            cout<<mainBoard;
+        }
+        
+        else if (cmd == "left") {
             mainBoard.moveBlockHorizontally(current, -multiplier);
         }
         
@@ -130,6 +137,7 @@ int main(int argc, const char * argv[]) {
             current = l->createBlock();
             next = l->createBlock();
         }
+        
         else if (cmd == "norandom"){
             vector<char> tmp;
             build_vector_from_file(tmp, file);
@@ -140,6 +148,14 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "random"){
             l->randomOn();
             next = l->createBlock();
+        }
+        
+        else if (cmd == "hint"){
+            
+        }
+        
+        else if (cmd == "sequence"){
+            
         }
         
         else if (cmd == "error"){

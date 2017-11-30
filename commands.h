@@ -77,8 +77,12 @@ void readCommand(istream &in, string &cmd, int &multiplier){
     string user_cmd;
     string numString;
     string tempFile;
-    
     in >> user_cmd;
+    
+    if (user_cmd.length() == 1 && (user_cmd == "I" || user_cmd == "J" || user_cmd == "L" || user_cmd == "O" || user_cmd == "S" || user_cmd == "Z" || user_cmd == "T")){
+        cmd = user_cmd;
+        return;
+    }
     if (user_cmd == "sequence" || user_cmd == "norandom") in >> tempFile;
     
     bool letterFound = false;

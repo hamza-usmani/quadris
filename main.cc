@@ -13,7 +13,8 @@ int highscore;
 int default_level;
 std::string file;
 int seed;
-
+int totalLinesCleared;
+int totalTurns;
 
 int main(int argc, const char * argv[]) {
     width = 11;
@@ -22,6 +23,8 @@ int main(int argc, const char * argv[]) {
     default_level = 0;
     file = "sequence.txt";
     seed = 1;
+    totalLinesCleared = 0;
+    totalTurns = 0;
     
     Level *l;
     
@@ -67,6 +70,13 @@ int main(int argc, const char * argv[]) {
     Block *next = l->createBlock();
 
     while(true){
+        if (totalTurns % 5 == 0){
+            if (totalLinesCleared < 1){
+                //mainBoard.addBlankBlock
+            }
+            totalLinesCleared = 0;
+        }
+        totalTurns++;
         mainBoard.setNext(next);
         
         if (!current){

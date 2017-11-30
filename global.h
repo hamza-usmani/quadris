@@ -9,5 +9,7 @@ extern int highscore;
 extern int default_level;
 extern std::string file;
 extern int seed;
+extern int totalLinesCleared;
+extern int totalTurns;
 
 #endif

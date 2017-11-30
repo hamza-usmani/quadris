@@ -91,10 +91,8 @@ void readCommand(istream &in, string &cmd, int &multiplier){
         }
     }
     
-    file = tempFile;
-    if (!numString.empty()){
-        multiplier = stoi(numString);
-    }
+    if (!tempFile.empty()) file = tempFile;
+    if (!numString.empty()) multiplier = stoi(numString);
     cmd = autofill(user_cmd);
 }
 

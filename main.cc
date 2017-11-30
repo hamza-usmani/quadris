@@ -60,13 +60,12 @@ int main(int argc, const char * argv[]) {
             }
 		}		
 	}
-	/* ----- END COMMAND-LINE ARGUMENT HANDLING ----- */
     
     l = buildLevel(default_level, file);
     Board mainBoard(width, height, l->getLevel());
     Block *current = l->createBlock();
     Block *next = l->createBlock();
-    
+
     while(true){
         mainBoard.setNext(next);
         
@@ -85,6 +84,7 @@ int main(int argc, const char * argv[]) {
         string cmd;
         int multiplier = 1;
         readCommand(cin, cmd, multiplier);
+        
         
         if (cmd.length() == 1){
             mainBoard.eraseBlock(current);
@@ -142,7 +142,7 @@ int main(int argc, const char * argv[]) {
             cin >> lvl;
             if (cin.fail()){
                 lvl = 0;
-                cout<<"You enetered an invalid Level. The game will run in default Level 0."<<endl;
+                cout<<"You entered an invalid Level. The game will run in default Level 0."<<endl;
             }
             default_level = lvl;
             l = buildLevel(default_level, file);

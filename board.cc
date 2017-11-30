@@ -1,8 +1,9 @@
 #include "board.h"
 #include "block.h"
 #include <iostream>
+#include "global.h"
 
-Board::Board(int width, int height, int curLevel): width(width), height(height), curLevel(curLevel), score(0), highscore(0){
+Board::Board(int width, int height, int curLevel): width(width), height(height), curLevel(curLevel), score(0){
    TextDisplay *tmpDisplay = new TextDisplay(width, height);
    td = tmpDisplay;
    next = nullptr;
@@ -241,10 +242,15 @@ void Board::LevelDown(int n){
     curLevel-= n;
 }
 
+int Board::getScore(){
+    return this->score;
+}
+
+
 std::ostream &operator<<(std::ostream &out, const Board &b){
     out<<"Level: "<<b.curLevel<<std::endl;
     out<<"Score: "<<b.score<<std::endl;
-    out<<"Hi Score: "<<b.highscore<<std::endl;
+    out<<"Hi Score: "<<highscore<<std::endl;
     out<< (*b.td);
     return out;
 }

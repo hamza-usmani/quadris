@@ -14,7 +14,6 @@ class Board{
     int height;
     int curLevel;
     int score;
-    int highscore;
     TextDisplay *td;
     Block *next;
     
@@ -34,6 +33,7 @@ class Board{
     void setNext(Block *b);
     void levelUp(int n);
     void LevelDown(int n);
+    int getScore();
     
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

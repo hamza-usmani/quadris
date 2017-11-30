@@ -1,6 +1,5 @@
 #include <iostream>
 #include <memory>
-#include <string>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -8,8 +7,22 @@
 #include "board.h"
 #include "commands.h"
 
+int width;
+int height;
+int highscore;
+int default_level;
+std::string file;
+int seed;
+
 
 int main(int argc, const char * argv[]) {
+    width = 11;
+    height = 18;
+    highscore = 0;
+    default_level = 0;
+    file = "sequence.txt";
+    seed = 1;
+    
     Level *l;
     
     /* ----- COMMAND-LINE ARGUMENT HANDLING -----*/

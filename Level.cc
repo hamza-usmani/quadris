@@ -64,13 +64,13 @@ void Level::randomOff(const std::vector<char> vec) {
 }
 
 Block *Level::changeCurrentBlock(std::string blockChar){
-    if (blockChar == "I") return create_I_Block();
-    else if (blockChar == "J") return create_J_Block();
-    else if (blockChar == "L") return create_L_Block();
-    else if (blockChar == "O") return create_O_Block();
-    else if (blockChar == "S") return create_S_Block();
-    else if (blockChar == "Z") return create_Z_Block();
-    else if (blockChar == "T") return create_T_Block();
+    if (blockChar == "I" || blockChar == "i") return create_I_Block();
+    else if (blockChar == "J" || blockChar == "j") return create_J_Block();
+    else if (blockChar == "L" || blockChar == "l") return create_L_Block();
+    else if (blockChar == "O" || blockChar == "o") return create_O_Block();
+    else if (blockChar == "S" || blockChar == "s") return create_S_Block();
+    else if (blockChar == "Z" || blockChar == "z") return create_Z_Block();
+    else if (blockChar == "T" || blockChar == "t") return create_T_Block();
     else return nullptr;
 }
 

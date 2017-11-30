@@ -73,7 +73,7 @@ void readCommand(istream &in, string &cmd, int &multiplier){
     string tempFile;
     in >> user_cmd;
     
-    if (user_cmd.length() == 1 && (user_cmd == "I" || user_cmd == "J" || user_cmd == "L" || user_cmd == "O" || user_cmd == "S" || user_cmd == "Z" || user_cmd == "T")){
+    if (user_cmd.length() == 1 && (user_cmd == "I" || user_cmd == "i" || user_cmd == "J" || user_cmd == "j" || user_cmd == "L" || user_cmd == "l" || user_cmd == "O" || user_cmd == "o" || user_cmd == "S" || user_cmd == "s" || user_cmd == "Z" || user_cmd == "z" || user_cmd == "T" || user_cmd == "t")){
         cmd = user_cmd;
         return;
     }

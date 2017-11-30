@@ -5,7 +5,7 @@
 #include "observer.h"
 
 class Block;
-enum State{ NONE = ' ', I = 'I', J = 'J', L = 'L', O = 'O', S = 'S', Z = 'Z', T = 'T' };
+enum State{ NONE = ' ', I = 'I', J = 'J', L = 'L', O = 'O', S = 'S', Z = 'Z', T = 'T', Star = '*' };
 
 struct Pos{
     int x;

@@ -30,6 +30,7 @@ void Cell::setBlock(Block *curBlock){
     else if (blockChar == 's') this->cellState = State::S;
     else if (blockChar == 'z') this->cellState = State::Z;
     else if (blockChar == 't') this->cellState = State::T;
+    else if (blockChar == '*') this->cellState = State::Star;
     this->cur = curBlock;
     this->notifyObservers();
 }

@@ -34,6 +34,7 @@ class Board{
     void levelUp(int n);
     void LevelDown(int n);
     int getScore();
+    void addBlankBlock();
     
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

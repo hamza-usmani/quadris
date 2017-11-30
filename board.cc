@@ -2,6 +2,7 @@
 #include "block.h"
 #include <iostream>
 #include "global.h"
+#include "blankblock.h"
 
 Board::Board(int width, int height, int curLevel): width(width), height(height), curLevel(curLevel), score(0){
    TextDisplay *tmpDisplay = new TextDisplay(width, height);
@@ -232,6 +233,12 @@ void Board::dropBlock(Block *b){
         totalLinesCleared += linesCleared;
     }
     if (this->score > highscore) highscore = this->score;
+}
+
+void Board::addBlankBlock(){
+    BlankBlock *tmp = new BlankBlock(curLevel);
+    tmp->moveHorizontally(this->width/2);
+    this->dropBlock(tmp);
 }
 
 void Board::setNext(Block *b){

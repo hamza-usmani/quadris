@@ -70,9 +70,9 @@ int main(int argc, const char * argv[]) {
     Block *next = l->createBlock();
 
     while(true){
-        if (totalTurns % 5 == 0){
+        if (l->getLevel() == 4 && totalTurns % 5 == 0){
             if (totalLinesCleared < 1){
-                //mainBoard.addBlankBlock
+                mainBoard.addBlankBlock();
             }
             totalLinesCleared = 0;
         }

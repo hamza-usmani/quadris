@@ -26,6 +26,17 @@ void build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
     }
 }
 
+void build_macro_vector_from_file(std::vector<string> &my_vect, std::string f_name){
+    std::ifstream my_file (f_name);
+    if (my_file.is_open()){
+        string x;
+        while (my_file >> x){
+            my_vect.emplace_back(x);
+        }
+        my_file.close();
+    }
+}
+
 Level *buildLevel(int n, string f_name){
     switch (n){
         case 1:
@@ -92,6 +103,31 @@ void readCommand(istream &in, string &cmd, int &multiplier){
     }
     
     if (!tempFile.empty()) file = tempFile;
+    if (!numString.empty()) multiplier = stoi(numString);
+    cmd = autofill(user_cmd);
+}
+
+void readMacroCommand(string &user_cmd, string &cmd, int &multiplier){
+    string numString;
+
+    
+    if (user_cmd.length() == 1 && (user_cmd == "I" || user_cmd == "i" || user_cmd == "J" || user_cmd == "j" || user_cmd == "L" || user_cmd == "l" || user_cmd == "O" || user_cmd == "o" || user_cmd == "S" || user_cmd == "s" || user_cmd == "Z" || user_cmd == "z" || user_cmd == "T" || user_cmd == "t")){
+        cmd = user_cmd;
+        return;
+    }
+    
+    bool letterFound = false;
+    
+    for (int i=0; i< user_cmd.length(); i++){
+        if (!letterFound && isdigit(user_cmd[i])){
+            numString+= user_cmd[i];
+        }
+        else {
+            user_cmd = user_cmd.substr(i);
+            break;
+        }
+    }
+    
     if (!numString.empty()) multiplier = stoi(numString);
     cmd = autofill(user_cmd);
 }

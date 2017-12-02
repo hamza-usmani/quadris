@@ -76,6 +76,9 @@ int main(int argc, const char * argv[]) {
     Block *current = l->createBlock();
     Block *next = l->createBlock();
 
+
+    bool use_macro = false;
+    int macro_cursor = 0;
     while(true){
         mainBoard.setNext(next);
         
@@ -93,7 +96,22 @@ int main(int argc, const char * argv[]) {
 
         string cmd;
         int multiplier = 1;
-        readCommand(cin, cmd, multiplier);
+
+     	if (use_macro){
+        	//std::cout<<"USING MACRO CMD"<<std::endl;
+        	std::vector<string> macro_vect;
+        	build_macro_vector_from_file(macro_vect, "macro.txt");
+        	std::string cur_macro_cmd = macro_vect.at(macro_cursor);
+        	macro_cursor++;
+        	if (macro_cursor == macro_vect.size()) use_macro = false;
+        	readMacroCommand(cur_macro_cmd, cmd, multiplier);
+        	//cmd = "drop";
+        	//std::cout<<"Cmd is "<<cmd<<std::endl;
+        	//std::cout<<"multiplier is "<<multiplier<<std::endl;
+
+        }else{
+        	readCommand(cin, cmd, multiplier);
+        }
         
         
         if (cmd.length() == 1){
@@ -209,7 +227,9 @@ int main(int argc, const char * argv[]) {
         }
         
         else if (cmd == "sequence"){
-            
+        	vector<string> tmp;
+            build_macro_vector_from_file(tmp, file);
+            use_macro = true;
         }
         
         else if (cmd == "error"){

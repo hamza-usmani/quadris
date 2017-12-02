@@ -72,8 +72,12 @@ int main(int argc, const char * argv[]) {
     
     l = buildLevel(default_level, file);
     Board mainBoard(width, height, l->getLevel());
-    GraphicsDisplay *display = new GraphicsDisplay(width, height, windowsize);
-    if (!textOnlyMode) mainBoard.setGraphics(display);
+    GraphicsDisplay *display;
+    
+    if (!textOnlyMode){
+        display = new GraphicsDisplay(width, height, windowsize);
+        mainBoard.setGraphics(display);
+    }
     
     Block *current = l->createBlock();
     Block *next = l->createBlock();
@@ -205,7 +209,7 @@ int main(int argc, const char * argv[]) {
             l = buildLevel(default_level, file);
             mainBoard.setGraphics(nullptr);
             mainBoard = Board(width, height, default_level);
-            mainBoard.setGraphics(display);
+            if (!textOnlyMode) mainBoard.setGraphics(display);
             current = l->createBlock();
             next = l->createBlock();
         }

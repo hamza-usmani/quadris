@@ -273,34 +273,94 @@ void Board::LevelDown(int n){
 
 Board::~Board(){ }
 
+void Board::deleteDisplay(){
+    delete td;
+    delete gd;
+}
+
 std::ostream &operator<<(std::ostream &out, const Board &b){
     out<< (*b.td);
     return out;
 }
 
 std::vector<Pos> Board::getHint(Block *b){
-	
-	int max_lines_cleared = 0;
-	std::vector<Pos> returnVect = b->getPositions();
 
-	for (int i=0; i<4; ++i){
-		b->rotateClockwise();
-		for (int j=0; j<this->width; ++j){
-			int lines_cleared = 0;
-			this->dropBlock(b);
-
-			for (int k=this->height; k > 0; --k){ //we now check each row to see how much we clear
-				if (this->isRowFull(k)){
-					lines_cleared++; //if we clear the row
-				}
-			}
-			if (lines_cleared > max_lines_cleared){
-				max_lines_cleared = lines_cleared;
-				returnVect = b->getPositions();
-			}
-			lines_cleared = 0;
-			b->moveHorizontally(1);
-		}
-	}
-	return returnVect;
+    std::vector<Pos> returnVect = b->getPositions();
+    std::vector<Pos> tmp = b->getPositions();
+    std::vector<Pos> bestPos;
+    
+    int maxCleared = 0;
+    int maxY = 0;
+    
+    for (int i=0; i<4; i++){
+      b->rotateClockwise();
+      returnVect = b->getPositions();
+      tmp = b->getPositions();
+    
+    for (int j = 0; j < this->width - b->getWidth(); j++){
+        for (auto &k: tmp){ //moving right
+            k.x += j;
+        }
+        
+        int linesCleared = 0;
+        int curY = b->getLeftCorner().y;
+        
+        //finding the lowest point we can go, dropping it
+        while (curY < height - 1){
+            bool found = false;
+            for (auto i: tmp){
+                if (this->grid.at(i.y+1).at(i.x).getCur() != b && this->grid.at(i.y+1).at(i.x).getState() != State::NONE && this->grid.at(i.y+1).at(i.x).getState() != State::Hint){
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+            
+            for (auto i:tmp){
+                this->grid.at(i.y).at(i.x).clearCell();
+            }
+            
+            for (auto &i:tmp){
+                i.y+=1;
+            }
+            
+            curY++;
+        }
+        
+        for (auto i:tmp){
+            this->grid.at(i.y).at(i.x).setHint();
+        }
+        
+        for (int k= height-1; k>2; k--){ //checking all rows if full
+            if (isRowFull(k)) linesCleared++;
+        }
+        
+        if (linesCleared > maxCleared) { //checking if more lines cleared
+            maxCleared = linesCleared;
+            bestPos.clear();
+            bestPos = tmp;
+        }
+        else if (linesCleared == maxCleared && curY > maxY){
+            maxY = curY;
+            bestPos.clear();
+            bestPos = tmp;
+        }
+        
+        for (auto k: tmp){ //setting cells back to NONE
+            if (this->grid.at(k.y).at(k.x).getState() == State::Hint) this->grid.at(k.y).at(k.x).clearCell();
+        }
+        
+        tmp = returnVect; //reset y coordinates
+    }
+    
+    }
+    for (auto i: bestPos){
+        grid.at(i.y).at(i.x).showHint();
+    }
+    return bestPos;
 }
+
+void Board::clearHint(std::vector<Pos> hint){
+    for (auto i: hint) this->grid.at(i.y).at(i.x).clearCell();
+}
+

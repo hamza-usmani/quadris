@@ -38,8 +38,10 @@ class Board{
     void LevelDown(int n);
     void addBlankBlock();
     std::vector<Pos> getHint(Block *b);
+    void clearHint(std::vector<Pos> hint);
     
     ~Board();
+    void deleteDisplay();
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

@@ -5,7 +5,7 @@
 #include "observer.h"
 
 class Block;
-enum State{ NONE = ' ', I = 'I', J = 'J', L = 'L', O = 'O', S = 'S', Z = 'Z', T = 'T', Star = '*' };
+enum State{ NONE = ' ', I = 'I', J = 'J', L = 'L', O = 'O', S = 'S', Z = 'Z', T = 'T', Star = '*' , Hint};
 
 struct Pos{
     int x;
@@ -27,6 +27,8 @@ class Cell{
     void setBlock(Block *curBlock);
     Block *getCur();
     void setCur(Block *changeTo);
+    void setHint();
+    void showHint();
     
     void attach(Observer *o);
     void notifyObservers();

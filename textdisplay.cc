@@ -45,6 +45,7 @@ void TextDisplay::notify(Cell &whoFrom){
     else if (whoFrom.getState() == State::Z) display.at(y).at(x) = 'Z';
     else if (whoFrom.getState() == State::T) display.at(y).at(x) = 'T';
     else if (whoFrom.getState() == State::Star) display.at(y).at(x) = '*';
+    else if (whoFrom.getState() == State::Hint) display.at(y).at(x) = '~';
 }
 
 

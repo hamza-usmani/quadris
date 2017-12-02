@@ -81,10 +81,7 @@ int main(int argc, const char * argv[]) {
     
     Block *current = l->createBlock();
     Block *next = l->createBlock();
-
-
-    bool use_macro = false;
-    int macro_cursor = 0;
+    
     while(true){
         mainBoard.setNext(next);
         
@@ -102,20 +99,7 @@ int main(int argc, const char * argv[]) {
 
         string cmd;
         int multiplier = 1;
-
-     	if (use_macro){
-        	std::vector<string> macro_vect;
-        	build_macro_vector_from_file(macro_vect, "macro.txt");
-        	std::string cur_macro_cmd = macro_vect.at(macro_cursor);
-        	macro_cursor++;
-        	if (macro_cursor == macro_vect.size()) use_macro = false;
-        	readMacroCommand(cur_macro_cmd, cmd, multiplier);
-
-        }
-        else{
-        	readCommand(cin, cmd, multiplier);
-        }
-        
+        readCommand(cin, cmd, multiplier);
         
         if (cmd.length() == 1){
             mainBoard.eraseBlock(current);
@@ -227,13 +211,15 @@ int main(int argc, const char * argv[]) {
         }
         
         else if (cmd == "hint"){
-            
+            vector<Pos> hint = mainBoard.getHint(current);            
+            cout<<mainBoard<<"Press any key to proceed and hide hint"<<endl;
+            char tmp;
+            cin >> tmp;
+            mainBoard.clearHint(hint);
         }
         
         else if (cmd == "sequence"){
-        	vector<string> tmp;
-            build_macro_vector_from_file(tmp, file);
-            use_macro = true;
+            
         }
         
         else if (cmd == "error"){
@@ -242,9 +228,10 @@ int main(int argc, const char * argv[]) {
         
         cout<<std::endl;
     }
+    
     delete current;
     delete next;
-    delete display;
+    mainBoard.deleteDisplay();
     
     return 0;
 }

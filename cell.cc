@@ -35,6 +35,16 @@ void Cell::setBlock(Block *curBlock){
     this->notifyObservers();
 }
 
+void Cell::setHint(){
+    this->cellState = State::Hint;
+}
+
+void Cell::showHint(){
+    this->cellState = State::Hint;
+    this->notifyObservers();
+}
+
+
 Block *Cell::getCur(){
     return this->cur;
 }

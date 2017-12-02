@@ -296,11 +296,11 @@ std::vector<Pos> Board::getHint(Block *b){
 			}
 			if (lines_cleared > max_lines_cleared){
 				max_lines_cleared = lines_cleared;
-				return_vect = b->getPositions();
+				returnVect = b->getPositions();
 			}
 			lines_cleared = 0;
 			b->moveHorizontally(1);
 		}
 	}
-	return return_vect;
+	return returnVect;
 }

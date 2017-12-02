@@ -13,10 +13,15 @@ int height;
 int curscore;
 int highscore;
 int default_level;
-std::string file;
+string file;
 int seed;
 int totalLinesCleared;
 int totalTurns;
+
+string macroFile;
+int macroIndex;
+vector<string> macros;
+bool useMacro;
 
 int main(int argc, const char * argv[]) {
     width = 11;
@@ -30,6 +35,9 @@ int main(int argc, const char * argv[]) {
     totalTurns = 0;
     int windowsize = 600;
     bool textOnlyMode = false;
+    
+    macroFile = "";
+    macroIndex = 0;
     
     Level *l;
     
@@ -99,7 +107,19 @@ int main(int argc, const char * argv[]) {
 
         string cmd;
         int multiplier = 1;
-        readCommand(cin, cmd, multiplier);
+        
+        if (useMacro){
+            string curMacrocmd = macros.at(macroIndex);
+            readMacroCommand(curMacrocmd, cmd, multiplier);
+            macroIndex++;
+            if (macroIndex == macros.size()){
+                useMacro = false;
+            }
+        }
+        
+        else{
+            readCommand(cin, cmd, multiplier);
+        }
         
         if (cmd.length() == 1){
             mainBoard.eraseBlock(current);
@@ -141,6 +161,7 @@ int main(int argc, const char * argv[]) {
                     }
                     totalLinesCleared = 0;
                 }
+                
                 totalTurns++;
             }
         }
@@ -200,9 +221,14 @@ int main(int argc, const char * argv[]) {
         
         else if (cmd == "norandom"){
             vector<char> tmp;
-            build_vector_from_file(tmp, file);
-            l->randomOff(tmp);
-            next = l->createBlock();
+            if (build_vector_from_file(tmp, file)){
+                l->randomOff(tmp);
+                next = l->createBlock();
+            }
+            else{
+                cout<<"You entered an invalid file. The game will continue as normal."<<endl;
+                continue;
+            }
         }
         
         else if (cmd == "random"){
@@ -219,7 +245,16 @@ int main(int argc, const char * argv[]) {
         }
         
         else if (cmd == "sequence"){
+            macros.clear();
             
+            if (build_macro_from_file(macros, macroFile)){
+                macroIndex = 0;
+                useMacro = true;
+            }
+            else{
+                cout<<"You entered an invalid file. The game will continue as normal."<<endl;
+                continue;
+            }
         }
         
         else if (cmd == "error"){

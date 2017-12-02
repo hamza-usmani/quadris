@@ -13,4 +13,9 @@ extern int seed;
 extern int totalLinesCleared;
 extern int totalTurns;
 
+extern std::string macroFile;
+extern int macroIndex;
+extern std::vector<std::string> macros;
+extern bool useMacro;
+
 #endif

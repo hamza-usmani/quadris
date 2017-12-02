@@ -15,8 +15,11 @@ using namespace std;
 
 std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint"};
 
-void build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
+bool build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
     std::ifstream my_file (f_name);
+    
+    if (!my_file.good()) return false;
+    
     if (my_file.is_open()){
         char x;
         while (my_file >> x){
@@ -24,10 +27,14 @@ void build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
         }
         my_file.close();
     }
+    return true;
 }
 
-void build_macro_vector_from_file(std::vector<string> &my_vect, std::string f_name){
+bool build_macro_from_file(std::vector<string> &my_vect, std::string f_name){
     std::ifstream my_file (f_name);
+    
+    if (!my_file.good()) return false;
+    
     if (my_file.is_open()){
         string x;
         while (my_file >> x){
@@ -35,7 +42,9 @@ void build_macro_vector_from_file(std::vector<string> &my_vect, std::string f_na
         }
         my_file.close();
     }
+    return true;
 }
+
 
 Level *buildLevel(int n, string f_name){
     switch (n){
@@ -88,7 +97,6 @@ void readCommand(istream &in, string &cmd, int &multiplier){
         cmd = user_cmd;
         return;
     }
-    if (user_cmd == "sequence" || user_cmd == "norandom") in >> tempFile;
     
     bool letterFound = false;
     
@@ -102,34 +110,39 @@ void readCommand(istream &in, string &cmd, int &multiplier){
         }
     }
     
-    if (!tempFile.empty()) file = tempFile;
     if (!numString.empty()) multiplier = stoi(numString);
     cmd = autofill(user_cmd);
+    
+    if (cmd == "sequence" || cmd == "norandom") in >> tempFile;
+    
+    if (!tempFile.empty() && cmd == "norandom") file = tempFile;
+    if (!tempFile.empty() && cmd == "sequence") macroFile = tempFile;
 }
 
-void readMacroCommand(string &user_cmd, string &cmd, int &multiplier){
-    string numString;
 
+//reading from macro vector
+void readMacroCommand(string macroCmd, string &cmd, int &multiplier){
+    string numString;
     
-    if (user_cmd.length() == 1 && (user_cmd == "I" || user_cmd == "i" || user_cmd == "J" || user_cmd == "j" || user_cmd == "L" || user_cmd == "l" || user_cmd == "O" || user_cmd == "o" || user_cmd == "S" || user_cmd == "s" || user_cmd == "Z" || user_cmd == "z" || user_cmd == "T" || user_cmd == "t")){
-        cmd = user_cmd;
+    if (macroCmd.length() == 1 && (macroCmd == "I" || macroCmd == "i" || macroCmd == "J" || macroCmd == "j" || macroCmd == "L" || macroCmd == "l" || macroCmd == "O" || macroCmd == "o" || macroCmd == "S" || macroCmd == "s" || macroCmd == "Z" || macroCmd == "z" || macroCmd == "T" || macroCmd == "t")){
+        cmd = macroCmd;
         return;
     }
     
     bool letterFound = false;
-    
-    for (int i=0; i< user_cmd.length(); i++){
-        if (!letterFound && isdigit(user_cmd[i])){
-            numString+= user_cmd[i];
+    for (int i=0; i< macroCmd.length(); i++){
+        if (!letterFound && isdigit(macroCmd[i])){
+            numString+= macroCmd[i];
         }
         else {
-            user_cmd = user_cmd.substr(i);
+            macroCmd = macroCmd.substr(i);
             break;
         }
     }
     
     if (!numString.empty()) multiplier = stoi(numString);
-    cmd = autofill(user_cmd);
+    cmd = autofill(macroCmd);
 }
+
 
 #endif

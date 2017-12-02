@@ -14,7 +14,6 @@ Board::Board(int width, int height, int curLevel): width(width), height(height),
         for (int i=0; i<this->width; i++){
             Cell tmpCell(i,j);
             tmpCell.attach(td);
-            //tmpCell.attach(gd);
             tmp.emplace_back(tmpCell);
         }
         this->grid.emplace_back(tmp);
@@ -22,8 +21,8 @@ Board::Board(int width, int height, int curLevel): width(width), height(height),
     gd = nullptr;
 }
 
-void Board::setGraphics(GraphicsDisplay *gd){
-    this->gd = gd;
+void Board::setGraphics(GraphicsDisplay *setTo){
+    this->gd = setTo;
     if (this->gd){
         for (auto &i: grid){
             for (auto &j: i){
@@ -272,10 +271,7 @@ void Board::LevelDown(int n){
     default_level = this->curLevel;
 }
 
-Board::~Board(){
-    delete td;
-    delete gd;
-}
+Board::~Board(){ }
 
 std::ostream &operator<<(std::ostream &out, const Board &b){
     out<< (*b.td);

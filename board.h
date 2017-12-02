@@ -22,7 +22,7 @@ class Board{
     public:
     Board(int width, int height, int curLevel);
     
-    void setGraphics(GraphicsDisplay *gd);
+    void setGraphics(GraphicsDisplay *setTo);
     bool isRowFull(int row);
     bool canPlace(Block *b);
     void removeLine(int row);

@@ -29,6 +29,7 @@ int main(int argc, const char * argv[]) {
     totalLinesCleared = 0;
     totalTurns = 0;
     int windowsize = 600;
+    bool textOnlyMode = false;
     
     Level *l;
     
@@ -36,6 +37,7 @@ int main(int argc, const char * argv[]) {
 	for (int i = 1; i<argc; ++i){
 		if(string(argv[i]) == "-text"){
 			cout<<"Quadris will now run in text-only mode."<<endl;
+            textOnlyMode = true;
 		}
         else if(string(argv[i]) == "-seed"){
             try{
@@ -71,7 +73,7 @@ int main(int argc, const char * argv[]) {
     l = buildLevel(default_level, file);
     Board mainBoard(width, height, l->getLevel());
     GraphicsDisplay *display = new GraphicsDisplay(width, height, windowsize);
-    mainBoard.setGraphics(display);
+    if (!textOnlyMode) mainBoard.setGraphics(display);
     
     Block *current = l->createBlock();
     Block *next = l->createBlock();
@@ -98,18 +100,15 @@ int main(int argc, const char * argv[]) {
         int multiplier = 1;
 
      	if (use_macro){
-        	//std::cout<<"USING MACRO CMD"<<std::endl;
         	std::vector<string> macro_vect;
         	build_macro_vector_from_file(macro_vect, "macro.txt");
         	std::string cur_macro_cmd = macro_vect.at(macro_cursor);
         	macro_cursor++;
         	if (macro_cursor == macro_vect.size()) use_macro = false;
         	readMacroCommand(cur_macro_cmd, cmd, multiplier);
-        	//cmd = "drop";
-        	//std::cout<<"Cmd is "<<cmd<<std::endl;
-        	//std::cout<<"multiplier is "<<multiplier<<std::endl;
 
-        }else{
+        }
+        else{
         	readCommand(cin, cmd, multiplier);
         }
         
@@ -198,12 +197,13 @@ int main(int argc, const char * argv[]) {
                 lvl = 0;
                 cout<<"You entered an invalid Level. The game will run in default Level 0."<<endl;
             }
-            mainBoard.setGraphics(nullptr);
             curscore = 0;
             totalLinesCleared = 0;
             totalTurns = 0;
+            
             default_level = lvl;
             l = buildLevel(default_level, file);
+            mainBoard.setGraphics(nullptr);
             mainBoard = Board(width, height, default_level);
             mainBoard.setGraphics(display);
             current = l->createBlock();
@@ -240,6 +240,7 @@ int main(int argc, const char * argv[]) {
     }
     delete current;
     delete next;
+    delete display;
     
     return 0;
 }

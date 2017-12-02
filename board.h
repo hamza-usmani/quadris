@@ -37,6 +37,7 @@ class Board{
     void levelUp(int n);
     void LevelDown(int n);
     void addBlankBlock();
+    std::vector<Pos> getHint(Block *b);
     
     ~Board();
     friend std::ostream &operator<<(std::ostream &out, const Board &b);

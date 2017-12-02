@@ -277,3 +277,30 @@ std::ostream &operator<<(std::ostream &out, const Board &b){
     out<< (*b.td);
     return out;
 }
+
+std::vector<Pos> Board::getHint(Block *b){
+	
+	int max_lines_cleared = 0;
+	std::vector<Pos> returnVect = b->getPositions();
+
+	for (int i=0; i<4; ++i){
+		b->rotateClockwise();
+		for (int j=0; j<this->width; ++j){
+			int lines_cleared = 0;
+			this->dropBlock(b);
+
+			for (int k=this->height; k > 0; --k){ //we now check each row to see how much we clear
+				if (this->isRowFull(k)){
+					lines_cleared++; //if we clear the row
+				}
+			}
+			if (lines_cleared > max_lines_cleared){
+				max_lines_cleared = lines_cleared;
+				return_vect = b->getPositions();
+			}
+			lines_cleared = 0;
+			b->moveHorizontally(1);
+		}
+	}
+	return return_vect;
+}

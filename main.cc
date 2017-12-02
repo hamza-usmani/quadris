@@ -221,7 +221,7 @@ int main(int argc, const char * argv[]) {
         
         else if (cmd == "norandom"){
             vector<char> tmp;
-            if (build_vector_from_file(tmp, file)){
+            if (buildVector<char>(tmp, file)){
                 l->randomOff(tmp);
                 next = l->createBlock();
             }
@@ -247,7 +247,7 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "sequence"){
             macros.clear();
             
-            if (build_macro_from_file(macros, macroFile)){
+            if (buildVector<string>(macros, macroFile)){
                 macroIndex = 0;
                 useMacro = true;
             }

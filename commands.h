@@ -15,13 +15,13 @@ using namespace std;
 
 std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint"};
 
-bool build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
+template <typename T> bool buildVector(std::vector<T> &my_vect, std::string f_name){
     std::ifstream my_file (f_name);
     
     if (!my_file.good()) return false;
     
     if (my_file.is_open()){
-        char x;
+        T x;
         while (my_file >> x){
             my_vect.emplace_back(x);
         }
@@ -29,22 +29,7 @@ bool build_vector_from_file(std::vector<char> &my_vect, std::string f_name){
     }
     return true;
 }
-
-bool build_macro_from_file(std::vector<string> &my_vect, std::string f_name){
-    std::ifstream my_file (f_name);
     
-    if (!my_file.good()) return false;
-    
-    if (my_file.is_open()){
-        string x;
-        while (my_file >> x){
-            my_vect.emplace_back(x);
-        }
-        my_file.close();
-    }
-    return true;
-}
-
 
 Level *buildLevel(int n, string f_name){
     switch (n){
@@ -62,7 +47,7 @@ Level *buildLevel(int n, string f_name){
             break;
         default:
             vector<char> sequence_txt_vector;
-            build_vector_from_file(sequence_txt_vector, f_name);
+            buildVector<char>(sequence_txt_vector, f_name);
             return new Level_0(sequence_txt_vector);
             break;
     }

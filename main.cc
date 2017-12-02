@@ -6,9 +6,11 @@
 #include <cstdlib>
 #include "board.h"
 #include "commands.h"
+#include "graphicsdisplay.h"
 
 int width;
 int height;
+int curscore;
 int highscore;
 int default_level;
 std::string file;
@@ -19,12 +21,14 @@ int totalTurns;
 int main(int argc, const char * argv[]) {
     width = 11;
     height = 18;
+    curscore = 0;
     highscore = 0;
     default_level = 0;
     file = "sequence.txt";
     seed = 1;
     totalLinesCleared = 0;
     totalTurns = 0;
+    int windowsize = 600;
     
     Level *l;
     
@@ -66,17 +70,13 @@ int main(int argc, const char * argv[]) {
     
     l = buildLevel(default_level, file);
     Board mainBoard(width, height, l->getLevel());
+    GraphicsDisplay *display = new GraphicsDisplay(width, height, windowsize);
+    mainBoard.setGraphics(display);
+    
     Block *current = l->createBlock();
     Block *next = l->createBlock();
 
     while(true){
-        if (l->getLevel() == 4 && totalTurns % 5 == 0){
-            if (totalLinesCleared < 1){
-                mainBoard.addBlankBlock();
-            }
-            totalLinesCleared = 0;
-        }
-        totalTurns++;
         mainBoard.setNext(next);
         
         if (!current){
@@ -129,20 +129,46 @@ int main(int argc, const char * argv[]) {
                 mainBoard.dropBlock(current);
                 current = next;
                 next = l->createBlock();
+                
+                if (l->getLevel() == 4 && totalTurns % 5 == 0 && totalTurns != 0){
+                    if (totalLinesCleared < 1){
+                        mainBoard.addBlankBlock();
+                    }
+                    totalLinesCleared = 0;
+                }
+                totalTurns++;
             }
         }
         
         else if (cmd == "levelup"){
+            totalLinesCleared = 0;
+            totalTurns = 0;
             int lvl = l->getLevel();
-            l = buildLevel(lvl+multiplier, file);
-            mainBoard.levelUp(multiplier);
+            if (lvl+multiplier > 4){
+                cout<<"Invalid Level multiplier! The game will run at maximum Level 4."<<endl;
+                l = buildLevel(4, file);
+                mainBoard.levelUp(4-lvl);
+            }
+            else{
+                l = buildLevel(lvl+multiplier, file);
+                mainBoard.levelUp(multiplier);
+            }
             if (lvl < 3 && l->getLevel() > 2) next->toggleHeavy();
         }
         
         else if (cmd == "leveldown"){
+            totalLinesCleared = 0;
+            totalTurns = 0;
             int lvl = l->getLevel();
-            l = buildLevel(lvl-multiplier, file);
-            mainBoard.LevelDown(multiplier);
+            if (lvl-multiplier < 0){
+                cout<<"Invalid Level multiplier! The game will run at minimum Level 0."<<endl;
+                l = buildLevel(0, file);
+                mainBoard.LevelDown(lvl);
+            }
+            else{
+                l = buildLevel(lvl-multiplier, file);
+                mainBoard.LevelDown(multiplier);
+            }
             if (lvl > 2 && l->getLevel() < 3) next->toggleHeavy();
         }
         
@@ -154,9 +180,14 @@ int main(int argc, const char * argv[]) {
                 lvl = 0;
                 cout<<"You entered an invalid Level. The game will run in default Level 0."<<endl;
             }
+            mainBoard.setGraphics(nullptr);
+            curscore = 0;
+            totalLinesCleared = 0;
+            totalTurns = 0;
             default_level = lvl;
             l = buildLevel(default_level, file);
             mainBoard = Board(width, height, default_level);
+            mainBoard.setGraphics(display);
             current = l->createBlock();
             next = l->createBlock();
         }
@@ -187,6 +218,8 @@ int main(int argc, const char * argv[]) {
         
         cout<<std::endl;
     }
+    delete current;
+    delete next;
     
     return 0;
 }

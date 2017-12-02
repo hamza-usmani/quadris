@@ -5,6 +5,7 @@
 #include <vector>
 #include "cell.h"
 #include "textdisplay.h"
+#include "graphicsdisplay.h"
 class Block;
 
 class Board{
@@ -15,11 +16,13 @@ class Board{
     int curLevel;
     int score;
     TextDisplay *td;
+    GraphicsDisplay *gd;
     Block *next;
     
     public:
     Board(int width, int height, int curLevel);
     
+    void setGraphics(GraphicsDisplay *gd);
     bool isRowFull(int row);
     bool canPlace(Block *b);
     void removeLine(int row);
@@ -33,9 +36,9 @@ class Board{
     void setNext(Block *b);
     void levelUp(int n);
     void LevelDown(int n);
-    int getScore();
     void addBlankBlock();
     
+    ~Board();
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

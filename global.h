@@ -5,6 +5,7 @@
 //GLOBAL VARIABLES
 extern int width; 
 extern int height;
+extern int curscore;
 extern int highscore;
 extern int default_level;
 extern std::string file;

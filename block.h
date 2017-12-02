@@ -43,6 +43,8 @@ class Block{
     
     //printing and output
     virtual std::vector<std::vector<State>> printBlock() = 0;
+    
+    virtual ~Block();
 };
 
 #endif

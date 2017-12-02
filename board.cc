@@ -14,9 +14,23 @@ Board::Board(int width, int height, int curLevel): width(width), height(height),
         for (int i=0; i<this->width; i++){
             Cell tmpCell(i,j);
             tmpCell.attach(td);
+            //tmpCell.attach(gd);
             tmp.emplace_back(tmpCell);
         }
         this->grid.emplace_back(tmp);
+    }
+    gd = nullptr;
+}
+
+void Board::setGraphics(GraphicsDisplay *gd){
+    this->gd = gd;
+    if (this->gd){
+        for (auto &i: grid){
+            for (auto &j: i){
+                j.attach(this->gd);
+                gd->notify(j);
+            }
+        }
     }
 }
 
@@ -65,6 +79,7 @@ void Board::removeLine(int row){
     //scoring for completely removed blocks
     for (auto &i: emptyBlocks){
         this->score += ((i->getLevelCreated() + 1) * (i->getLevelCreated() + 1));
+        curscore = this->score;
     }
 }
 
@@ -230,6 +245,7 @@ void Board::dropBlock(Block *b){
     //scoring for number of lines removed
     if (linesCleared > 0) {
         this->score+= ((curLevel + linesCleared) * (curLevel + linesCleared));
+        curscore = this->score;
         totalLinesCleared += linesCleared;
     }
     if (this->score > highscore) highscore = this->score;
@@ -243,24 +259,25 @@ void Board::addBlankBlock(){
 
 void Board::setNext(Block *b){
     this->next = b;
-    td->setNext(next);
+    if (td) td->setNext(next);
+    if (gd) gd->setNext(next);
 }
 
 void Board::levelUp(int n){
     this->curLevel+= n;
+    default_level = this->curLevel;
 }
 void Board::LevelDown(int n){
     this->curLevel-= n;
+    default_level = this->curLevel;
 }
 
-int Board::getScore(){
-    return this->score;
+Board::~Board(){
+    delete td;
+    delete gd;
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &b){
-    out<<"Level: "<<b.curLevel<<std::endl;
-    out<<"Score: "<<b.score<<std::endl;
-    out<<"Hi Score: "<<highscore<<std::endl;
     out<< (*b.td);
     return out;
 }

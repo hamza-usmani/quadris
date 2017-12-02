@@ -78,3 +78,5 @@ int Block::getWidth(){
 int Block::getHeight(){
     return this->height;
 }
+
+Block::~Block(){ }

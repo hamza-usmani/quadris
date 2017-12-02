@@ -1,6 +1,7 @@
 #include <iostream>
 #include "textdisplay.h"
 #include "cell.h"
+#include "global.h"
 
 TextDisplay::TextDisplay(int width, int height): width(width), height(height), next(nullptr) {
     for (int i=0; i<height; i++){
@@ -48,6 +49,10 @@ void TextDisplay::notify(Cell &whoFrom){
 
 
 std::ostream &operator<<(std::ostream &out, TextDisplay &td){
+    out<<"Level: "<<default_level<<std::endl;
+    out<<"Score: "<<curscore<<std::endl;
+    out<<"Hi Score: "<<highscore<<std::endl;
+    
     for (int i=0; i<td.width; i++) out<<"-";
     out<<std::endl;
     for (auto i: td.display){

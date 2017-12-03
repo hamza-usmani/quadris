@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
     file = "sequence.txt";
     seed = 1;
     totalLinesCleared = 0;
-    totalTurns = 0;
+    totalTurns = 1;
     int windowsize = 600;
     bool textOnlyMode = false;
     
@@ -172,7 +172,7 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "levelup"){
             Level *temp = l;
             totalLinesCleared = 0;
-            totalTurns = 0;
+            totalTurns = 1;
             int lvl = l->getLevel();
             if (lvl+multiplier > 4){
                 cout<<"Invalid Level multiplier! The game will run at maximum Level 4."<<endl;
@@ -190,7 +190,7 @@ int main(int argc, const char * argv[]) {
         else if (cmd == "leveldown"){
             Level *temp = l;
             totalLinesCleared = 0;
-            totalTurns = 0;
+            totalTurns = 1;
             int lvl = l->getLevel();
             if (lvl-multiplier < 0){
                 cout<<"Invalid Level multiplier! The game will run at minimum Level 0."<<endl;
@@ -216,7 +216,7 @@ int main(int argc, const char * argv[]) {
             }
             curscore = 0;
             totalLinesCleared = 0;
-            totalTurns = 0;
+            totalTurns = 1;
             
             default_level = lvl;
             l = buildLevel(default_level, file);

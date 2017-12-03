@@ -73,7 +73,7 @@ int main(int argc, const char * argv[]) {
             }
             catch(...){
                 default_level = 0;
-                cout<<"You enetered an invalid Level. The game will run in default Level 0."<<endl;
+                cout<<"You entered an invalid Level. The game will run in default Level 0."<<endl;
             }
 		}		
 	}
@@ -119,11 +119,14 @@ int main(int argc, const char * argv[]) {
         
         else{
             readCommand(cin, cmd, multiplier);
+            if (cmd.empty()) break;
         }
         
         if (cmd.length() == 1){
             mainBoard.eraseBlock(current);
+            Block *temp = current;
             current = l->changeCurrentBlock(cmd);
+            delete temp;
             mainBoard.addBlock(current);
             cout<<mainBoard;
         }
@@ -167,6 +170,7 @@ int main(int argc, const char * argv[]) {
         }
         
         else if (cmd == "levelup"){
+            Level *temp = l;
             totalLinesCleared = 0;
             totalTurns = 0;
             int lvl = l->getLevel();
@@ -180,9 +184,11 @@ int main(int argc, const char * argv[]) {
                 mainBoard.levelUp(multiplier);
             }
             if (lvl < 3 && l->getLevel() > 2) next->toggleHeavy();
+            delete temp;
         }
         
         else if (cmd == "leveldown"){
+            Level *temp = l;
             totalLinesCleared = 0;
             totalTurns = 0;
             int lvl = l->getLevel();
@@ -196,9 +202,11 @@ int main(int argc, const char * argv[]) {
                 mainBoard.LevelDown(multiplier);
             }
             if (lvl > 2 && l->getLevel() < 3) next->toggleHeavy();
+            delete temp;
         }
         
         else if (cmd == "restart"){
+            Level *temp = l;
             int lvl;
             cout<<"Enter what Level (0-4) would you like to start the new game at: ";
             cin >> lvl;
@@ -213,10 +221,14 @@ int main(int argc, const char * argv[]) {
             default_level = lvl;
             l = buildLevel(default_level, file);
             mainBoard.setGraphics(nullptr);
+            mainBoard.deleteDisplay();
             mainBoard = Board(width, height, default_level);
             if (!textOnlyMode) mainBoard.setGraphics(display);
+
             current = l->createBlock();
             next = l->createBlock();
+
+            delete temp;
         }
         
         else if (cmd == "norandom"){
@@ -233,7 +245,9 @@ int main(int argc, const char * argv[]) {
         
         else if (cmd == "random"){
             l->randomOn();
+            Block *temp = next;
             next = l->createBlock();
+            delete temp;
         }
         
         else if (cmd == "hint"){
@@ -261,11 +275,14 @@ int main(int argc, const char * argv[]) {
             cout<<"Invalid Command"<<std::endl;
         }
         
+        else if (cmd == "quit"){
+            break;
+        }
+        
         cout<<std::endl;
     }
     
-    delete current;
-    delete next;
+    delete l;
     mainBoard.deleteDisplay();
     
     return 0;

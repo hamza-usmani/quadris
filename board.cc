@@ -3,6 +3,7 @@
 #include <iostream>
 #include "global.h"
 #include "blankblock.h"
+#include <set>
 
 Board::Board(int width, int height, int curLevel): width(width), height(height), curLevel(curLevel), score(0){
    TextDisplay *tmpDisplay = new TextDisplay(width, height);
@@ -274,6 +275,18 @@ void Board::LevelDown(int n){
 Board::~Board(){ }
 
 void Board::deleteDisplay(){
+    std::set<Block *> toClear;
+    
+    for (auto i: grid){
+        for (auto j: i){
+            if (j.getCur()) toClear.insert(j.getCur());
+        }
+    }
+    
+    for (auto i: toClear){
+        delete i;
+    }
+    delete next;
     delete td;
     delete gd;
 }

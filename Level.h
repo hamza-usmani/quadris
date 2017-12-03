@@ -30,7 +30,7 @@ class Level{
     void randomOn();
     void randomOff(const std::vector<char> vec);
     Block *changeCurrentBlock(std::string blockChar);
-    ~Level();
+    virtual ~Level();
 };
 
 #endif

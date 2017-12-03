@@ -6,9 +6,10 @@
 #include "observer.h"
 #include "window.h"
 #include "cell.h"
+#include "block.h"
 
 class GraphicsDisplay: public Observer {
-    const int width, height, winSize;
+    int width, height, winSize;
     int gLevel, gScore, gHighscore;
     Xwindow xw;
     Block *next;

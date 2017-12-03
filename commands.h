@@ -13,7 +13,7 @@
 
 using namespace std;
 
-std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint"};
+std::vector<std::string> Master_CMD_List = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "restart", "hint", "quit"};
 
 template <typename T> bool buildVector(std::vector<T> &my_vect, std::string f_name){
     std::ifstream my_file (f_name);
@@ -77,7 +77,10 @@ void readCommand(istream &in, string &cmd, int &multiplier){
     string numString;
     string tempFile;
     in >> user_cmd;
-    
+    if (in.eof() || user_cmd.empty()){
+        cmd = "";
+        return;
+    }
     if (user_cmd.length() == 1 && (user_cmd == "I" || user_cmd == "i" || user_cmd == "J" || user_cmd == "j" || user_cmd == "L" || user_cmd == "l" || user_cmd == "O" || user_cmd == "o" || user_cmd == "S" || user_cmd == "s" || user_cmd == "Z" || user_cmd == "z" || user_cmd == "T" || user_cmd == "t")){
         cmd = user_cmd;
         return;

@@ -281,7 +281,7 @@ int main(int argc, const char * argv[]) {
         
         cout<<std::endl;
     }
-    
+    cout<<"Game Over!"<<std::endl;
     delete l;
     mainBoard.deleteDisplay();
     

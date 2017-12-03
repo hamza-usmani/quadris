@@ -85,7 +85,7 @@ void GraphicsDisplay::notify(Cell &whoNotified) {
     
     switch(curState) {
         case State::Hint:
-            xw.drawBigString((col * cellSize) + 2, (row * cellSize) + 25, "x");
+            xw.drawBigString((col * cellSize) + 2, (row * cellSize) + 25, "?");
             break;
         case State::Star:
             xw.fillRectangle(col * cellSize, row * cellSize, cellSize, cellSize, Xwindow::Black);

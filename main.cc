@@ -252,7 +252,7 @@ int main(int argc, const char * argv[]) {
         
         else if (cmd == "hint"){
             vector<Pos> hint = mainBoard.getHint(current);            
-            cout<<mainBoard<<"Press any key to proceed and hide hint"<<endl;
+            cout<<mainBoard<<"Enter anything to proceed and hide hint"<<endl;
             char tmp;
             cin >> tmp;
             mainBoard.clearHint(hint);

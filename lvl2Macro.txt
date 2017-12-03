@@ -1,0 +1,17 @@
+2levelu
+2drop
+4rig
+drop
+8righ
+4lef
+drop
+2clo
+3rig
+3lef
+drop
+count
+right
+left
+right
+clockwise
+drop

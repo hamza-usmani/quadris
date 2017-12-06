@@ -92,20 +92,22 @@ int main(int argc, const char * argv[]) {
     
     while(true){
         mainBoard.setNext(next);
-        
+        string cmd;
         if (!current){
             cout<<mainBoard;
             break;
         }
         if (!mainBoard.canPlace(current)){
             cout<<"No Board space for new block. Game Over!"<<std::endl;
-            return 1;
+            cmd = "restart";
         }
         
-        mainBoard.addBlock(current);
-        cout<<mainBoard;
+        if (cmd != "restart"){
+        	mainBoard.addBlock(current);
+        	cout<<mainBoard;
+    	}
 
-        string cmd;
+        
         int multiplier = 1;
         
         if (useMacro){
@@ -117,7 +119,7 @@ int main(int argc, const char * argv[]) {
             }
         }
         
-        else{
+        else if (cmd!="restart"){
             readCommand(cin, cmd, multiplier);
             if (cmd.empty()) break;
         }

@@ -191,6 +191,9 @@ void Board::rotateClockwise(Block *b, int repeat){
         this->addBlock(b);
         repeat--;
     }
+    if (b->getIsHeavy()){
+        moveDown(b, 1);
+    }
 }
 
 //rotate counterclockwise
@@ -207,6 +210,9 @@ void Board::rotateCounterclockwise(Block *b, int repeat){
         }
         this->addBlock(b);
         repeat--;
+    }
+    if (b->getIsHeavy()){
+        moveDown(b, 1);
     }
 }
 
